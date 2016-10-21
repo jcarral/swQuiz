@@ -1,0 +1,118 @@
+.quiz {
+    display: flex;
+    flex-flow: column;
+
+    &-question {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        margin-bottom: 2em;
+
+        &-container{
+          display: flex;
+        }
+
+        &--answer {
+            display: flex;
+            height: 30px;
+            margin-bottom: 5px;
+
+            &>label {
+                width: 30px;
+                height: 100%;
+                background-color: $mainDarkColor;
+                text-align: center;
+                line-height: 30px;
+                margin-left: 10px;
+            }
+        }
+    }
+}
+
+.question {
+    width: 100%;
+    padding: .5em 0;
+    font-size: 1.5em;
+    border: none;
+    border-bottom: 2px solid $mainDarkColor;
+    padding-bottom: 1em;
+    padding-left: 1.25em;
+    color: $mainColor;
+    margin-bottom: 1em;
+    box-sizing: border-box;
+
+    &-pos{
+      width: 66px;
+      height: 66px;
+      background-color: $mainDarkColor;
+      text-align: center;
+      line-height: 66px;
+      font-size: 2em;
+      color: white;
+      font-weight: bolder;
+    }
+
+
+}
+
+.answer {
+    box-sizing: border-box;
+    width: 450px;
+    padding: .5em 0;
+    font-size: 1em;
+    border: none;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 1.25em;
+    padding-left: 1.25em;
+    color: #757575;
+
+    &:focus{
+      outline: none;
+    }
+}
+
+.correct{
+  color: #4CAF50 !important;
+  margin-left: 0 !important;
+}
+
+.wrong{
+  color: #FF3D00;
+}
+
+select{
+  -webkit-appearance: none;
+    -webkit-border-radius: 0px;
+}
+
+.select-subject{
+  background-color: #2196F3;
+  height: 30px;
+  width: 300px;
+  border-radius: 0;
+  border: 0;
+  padding-left: 10px;
+  color: white;
+}
+
+.quiz-difficulty{
+  width: 120px;
+  height: 30px;
+  border: 0;
+  border-bottom: 1px solid #eaeaea;
+  box-sizing: border-box;
+  padding-left: 10px;
+}
+
+.quiz-submit{
+  width: 100%;
+  height: 30px;
+  color: white;
+  background-color: #01579B;
+  border: none;
+  cursor: pointer;
+}
+
+label.fa{
+  color: white;
+}

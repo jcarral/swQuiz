@@ -5,6 +5,16 @@ var buffer = require('vinyl-buffer');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var babel = require('babelify');
+var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
+
+
+gulp.task('styles', function() {
+    gulp.src('./sass/**/*.scss')
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(autoprefixer())
+        .pipe(gulp.dest('../static/css/'));
+});
 
 function compile(watch) {
   var bundler = watchify(browserify('./script/main.js', { debug: true }).transform(babel));
@@ -16,7 +26,7 @@ function compile(watch) {
       .pipe(buffer())
       .pipe(sourcemaps.init({ loadMaps: true }))
       .pipe(sourcemaps.write('./'))
-      .pipe(gulp.dest('../script'));
+      .pipe(gulp.dest('../static/script'));
   }
 
   if (watch) {
@@ -34,6 +44,7 @@ function watch() {
 };
 
 gulp.task('build', function() { return compile(); });
-gulp.task('watch', function() { return watch(); });
-
-gulp.task('default', ['watch']);
+gulp.task('default',function() {
+    watch();
+    gulp.watch('./sass/**/*.scss',['styles']);
+});

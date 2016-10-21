@@ -1,0 +1,26 @@
+@import '__variables.scss';
+
+body{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto';
+}
+
+.container {
+    min-width: 980px;
+}
+
+.title {
+    color: $mainColor;
+}
+
+@import './__assets.scss';
+@import './partials/__header.scss';
+@import './partials/__quizForm.scss';
+@import './partials/__footer.scss';
