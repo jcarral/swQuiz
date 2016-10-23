@@ -15,7 +15,7 @@
         <div class="container header-container">
             <div class="header-title">
                 <img src="/static/images/logo.png" width="48px" height="48px" alt="" class="header-logo" />
-                <h1 class="header-title title">Sistemas web: &nbsp;<strong>QUIZ</strong></h1>
+                <h1 class="header-title "><a href="/" class="title">Sistemas web: &nbsp;<strong>QUIZ</strong></a></h1>
             </div>
             <div class="header-btns">
                 <div class="btn-login btn-header">SignIn</div>

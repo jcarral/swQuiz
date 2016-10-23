@@ -104,15 +104,34 @@ select{
   padding-left: 10px;
 }
 
-.quiz-submit{
-  width: 100%;
+.btn-submit{
+  width: 50%;
   height: 30px;
   color: white;
-  background-color: #01579B;
   border: none;
   cursor: pointer;
+  display: inline;
+  box-sizing: border-box;
+  font-size: 1em;
+  transition: all 0.25s ease;
+}
+.php-submit{
+  background-color: $mainDarkColor;
+  &:hover{
+    background-color: darken($mainDarkColor, 10%);
+  }
 }
 
+.js-submit{
+  background-color: $pinkColor;
+  &:hover{
+    background-color: darken($pinkColor, 10%);
+  }
+}
+
+.quiz-submit{
+  display: flex;
+}
 label.fa{
   color: white;
 }

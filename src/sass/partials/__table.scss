@@ -38,6 +38,9 @@
 .cell {
   padding: 6px 12px;
   display: table-cell;
+  &-answer{
+    max-width: 50px;
+  }
 }
 @media screen and (max-width: 580px) {
   .cell {

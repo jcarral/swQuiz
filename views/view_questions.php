@@ -20,6 +20,7 @@
 
   <?php
     require_once __DIR__ . "/../lib/functions.php";
+    require_once __DIR__ . "/../lib/validaciones.php";
     $pathToJson = __DIR__ . "/../static/data/questions.json";
     $jsonString = file_get_contents($pathToJson);
     $data = json_decode($jsonString);

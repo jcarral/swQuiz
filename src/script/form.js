@@ -32,7 +32,7 @@ const generarJSON = () => {
       question = {}
       if (!validarPregunta(pregunta)) return false
       let select = pregunta.querySelector('select')
-      question["-complexity"] = pregunta.querySelector('input[type=number]').value
+      question["-complexity"] = pregunta.querySelector('input[type=number]').value.toString()
       question["-subject"] = select.options[select.selectedIndex].value
       question.itemBody = {
           "p": pregunta.querySelector('.question').value
@@ -52,6 +52,7 @@ const submitFormPHP = function(e) {
     if (!validarForm()) window.alert("Formulario con campos vacios")
     else{
       //TODO: Gestionar el envio de datos v.PHP
+      form.submit()
     }
 }
 
@@ -91,11 +92,11 @@ const insertQuestion = () => {
       </div>
       <div class="quiz-question--answer">
           <label for="respuestas[]" class="fa fa-check correct"></label>
-          <input type="text" name="respuestas[]" class="answer" value="" required>
+          <input type="text" name="respuesta[]" class="answer" value="" required>
           <label for="dificultad[]" class="fa fa-tachometer"></label>
-          <input type="number" min="0" max="5" name="dificultad[]" value="0" class="quiz-difficulty">
+          <input type="number" min="1" max="5" name="dificultad[]" value="0" class="quiz-difficulty">
           <label for="subject[]" class="fa fa-book"></label>
-          <select class="select-subject" name="">
+          <select class="select-subject" name="subject[]">
             <option value="Internet">Internet</option>
             <option value="Web">Web</option>
           </select>

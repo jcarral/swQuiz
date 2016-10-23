@@ -10,6 +10,7 @@ body{
   padding: 0;
   margin: 0;
   font-family: 'Roboto';
+  overflow-x: hidden;
 }
 
 .container {
@@ -17,9 +18,16 @@ body{
 }
 
 .title {
-    color: $mainColor;
+    color: white;
+    transition: all 0.25s ease;
+    &:hover{
+      color: darken(white, 15%);
+    }
 }
 
+a{
+  text-decoration: none;
+}
 @import './__assets.scss';
 @import './partials/__header.scss';
 @import './partials/__quizForm.scss';

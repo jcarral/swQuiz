@@ -1,11 +1,12 @@
 .footer {
     background-color: #424242;
-    width: 100%;
+    width: 110%; //A saber por que con el 100% no cubre todo
     height: 48px;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    box-sizing: border-box;
+    margin-top: 16px;
     &>a {
         color: white;
         margin: 0 auto;

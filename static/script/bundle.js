@@ -95,7 +95,7 @@ var generarJSON = function generarJSON() {
             question = {};
             if (!validarPregunta(pregunta)) return false;
             var select = pregunta.querySelector('select');
-            question["-complexity"] = pregunta.querySelector('input[type=number]').value;
+            question["-complexity"] = pregunta.querySelector('input[type=number]').value.toString();
             question["-subject"] = select.options[select.selectedIndex].value;
             question.itemBody = {
                 "p": pregunta.querySelector('.question').value
@@ -128,6 +128,7 @@ var submitFormPHP = function submitFormPHP(e) {
     e.preventDefault();
     if (!validarForm()) window.alert("Formulario con campos vacios");else {
         //TODO: Gestionar el envio de datos v.PHP
+        form.submit();
     }
 };
 
@@ -158,7 +159,7 @@ var writeFile = function writeFile() {
 
 var insertQuestion = function insertQuestion() {
     var count = document.getElementsByClassName('quiz-question').length + 1;
-    var questionContent = '\n      <div class="quiz-question-container">\n          <div class="question-pos">' + count + '</div>\n          <input type="text" name="pregunta[]" value="" placeholder="Introduce una nueva pregunta..." class="question" required>\n      </div>\n      <div class="quiz-question--answer">\n          <label for="respuestas[]" class="fa fa-check correct"></label>\n          <input type="text" name="respuestas[]" class="answer" value="" required>\n          <label for="dificultad[]" class="fa fa-tachometer"></label>\n          <input type="number" min="0" max="5" name="dificultad[]" value="0" class="quiz-difficulty">\n          <label for="subject[]" class="fa fa-book"></label>\n          <select class="select-subject" name="">\n            <option value="Internet">Internet</option>\n            <option value="Web">Web</option>\n          </select>\n      </div>\n  ';
+    var questionContent = '\n      <div class="quiz-question-container">\n          <div class="question-pos">' + count + '</div>\n          <input type="text" name="pregunta[]" value="" placeholder="Introduce una nueva pregunta..." class="question" required>\n      </div>\n      <div class="quiz-question--answer">\n          <label for="respuestas[]" class="fa fa-check correct"></label>\n          <input type="text" name="respuesta[]" class="answer" value="" required>\n          <label for="dificultad[]" class="fa fa-tachometer"></label>\n          <input type="number" min="1" max="5" name="dificultad[]" value="0" class="quiz-difficulty">\n          <label for="subject[]" class="fa fa-book"></label>\n          <select class="select-subject" name="subject[]">\n            <option value="Internet">Internet</option>\n            <option value="Web">Web</option>\n          </select>\n      </div>\n  ';
     if (!validarForm()) return window.alert('No puedes añadir más preguntas si aún hay sin rellenar');
     var nodeQuestion = document.createElement('div');
     nodeQuestion.classList = "quiz-question";
@@ -178,7 +179,156 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _form2.default)();
 
 },{"./form.js":1}],3:[function(require,module,exports){
-module.exports={"assessmentItems":{"assessmentItem":[{"-complexity":"5","-subject":"Web","itemBody":{"p":"Tag HTML para añadir un formulario"},"correctResponse":{"value":"FORM"}},{"-complexity":"4","-subject":"Internet","itemBody":{"p":"Este protocolo acabará funcionando incluso entre dos latas unidas por un cordón"},"correctResponse":{"value":"TCP/IP"}},{"-complexity":"2","-subject":"Internet","itemBody":{"p":"asd"},"correctResponse":{"value":"a"}},{"-complexity":"0","-subject":"Internet","itemBody":{"p":"jhc"},"correctResponse":{"value":"jhgc"}},{"-complexity":"4","-subject":"Internet","itemBody":{"p":"ghcv"},"correctResponse":{"value":"32"}}]}}
+module.exports={
+    "assessmentItems": {
+        "assessmentItem": [{
+            "-complexity": "2",
+            "-subject": "Web",
+            "itemBody": {
+                "p": "Tag HTML para añadir un formulario"
+            },
+            "correctResponse": {
+                "value": "FORM"
+            }
+        }, {
+            "-complexity": "4",
+            "-subject": "Internet",
+            "itemBody": {
+                "p": "Este protocolo acabará funcionando incluso entre dos latas unidas por un cordón"
+            },
+            "correctResponse": {
+                "value": "TCP/IP"
+            }
+        }, {
+            "-complexity": "1",
+            "-subject": "Internet",
+            "itemBody": {
+                "p": "Preg1"
+            },
+            "correctResponse": {
+                "value": "Res1"
+            }
+        }, {
+            "-complexity": "2",
+            "-subject": "Web",
+            "itemBody": {
+                "p": "Preg2"
+            },
+            "correctResponse": {
+                "value": "Res2"
+            }
+        }, {
+            "-complexity": "1",
+            "-subject": "Internet",
+            "itemBody": {
+                "p": "Voy a validar con JS"
+            },
+            "correctResponse": {
+                "value": "Y te cuelo un 0"
+            }
+        }, {
+            "-complexity": "1",
+            "-subject": "Internet",
+            "itemBody": {
+                "p": "Los 0 no pasan "
+            },
+            "correctResponse": {
+                "value": "Solo 1"
+            }
+        }, {
+            "-complexity": "1",
+            "-subject": "Internet",
+            "itemBody": {
+                "p": "Me apetece joder la tabla "
+            },
+            "correctResponse": {
+                "value": "Voy a descuadrarla a ver que pasa, si pongo una respuesta larga se va a tomar por culo? Puto css"
+            }
+        }, {
+            "-complexity": "1",
+            "-subject": "Internet",
+            "itemBody": {
+                "p": "jgc"
+            },
+            "correctResponse": {
+                "value": "jgc"
+            }
+        }, {
+            "-complexity": "1",
+            "-subject": "Internet",
+            "itemBody": {
+                "p": "cjkjn"
+            },
+            "correctResponse": {
+                "value": "124"
+            }
+        }, {
+            "-complexity": "3",
+            "-subject": "Internet",
+            "itemBody": {
+                "p": "dfhjk"
+            },
+            "correctResponse": {
+                "value": "va con php..."
+            }
+        }, {
+            "-complexity": "1",
+            "-subject": "Internet",
+            "itemBody": {
+                "p": "jgc"
+            },
+            "correctResponse": {
+                "value": "jgc"
+            }
+        }, {
+            "-complexity": "1",
+            "-subject": "Internet",
+            "itemBody": {
+                "p": "cjkjn"
+            },
+            "correctResponse": {
+                "value": "124"
+            }
+        }, {
+            "-complexity": "3",
+            "-subject": "Internet",
+            "itemBody": {
+                "p": "dfhjk"
+            },
+            "correctResponse": {
+                "value": "va con php..."
+            }
+        }, {
+            "-complexity": "1",
+            "-subject": "Internet",
+            "itemBody": {
+                "p": "Va<sa<ac"
+            },
+            "correctResponse": {
+                "value": "sdasd"
+            }
+        }, {
+            "-complexity": "1",
+            "-subject": "Internet",
+            "itemBody": {
+                "p": "sadad"
+            },
+            "correctResponse": {
+                "value": "asdas"
+            }
+        }, {
+            "-complexity": "1",
+            "-subject": "Internet",
+            "itemBody": {
+                "p": "122131"
+            },
+            "correctResponse": {
+                "value": "SASDASD"
+            }
+        }]
+    }
+}
+
 },{}]},{},[2])
 
 
