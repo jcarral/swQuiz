@@ -6,8 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function () {
-    form.addEventListener('submit', submitForm);
+    form.addEventListener('submit', submitFormPHP);
     btnAddQuestion.addEventListener('click', insertQuestion);
+    btnSendJS.addEventListener('click', submitFormJS);
 };
 
 var preguntas = void 0;
@@ -15,6 +16,7 @@ var quizJSON = require('../../static/data/questions.json');
 
 //UI elements
 var btnAddQuestion = document.getElementById('newQuestion');
+var btnSendJS = document.getElementById('btn-submit-js');
 var form = document.getElementById('formQuiz');
 
 var validarPregunta = function validarPregunta(pregunta) {
@@ -49,8 +51,6 @@ var validarPregunta = function validarPregunta(pregunta) {
 
 var validarForm = function validarForm() {
     preguntas = document.getElementsByClassName('quiz-question');
-    var question = void 0;
-    var title = "titulo";
 
     var _iteratorNormalCompletion2 = true;
     var _didIteratorError2 = false;
@@ -60,18 +60,7 @@ var validarForm = function validarForm() {
         for (var _iterator2 = preguntas[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
             var pregunta = _step2.value;
 
-            question = {};
             if (!validarPregunta(pregunta)) return false;
-            var select = pregunta.querySelector('select');
-            question["-complexity"] = pregunta.querySelector('input[type=number]').value;
-            question["-subject"] = select.options[select.selectedIndex].value;
-            question.itemBody = {
-                "p": pregunta.querySelector('.question').value
-            };
-            question.correctResponse = {
-                "value": pregunta.querySelector('.answer').value
-            };
-            addQuestion(question);
         }
     } catch (err) {
         _didIteratorError2 = true;
@@ -88,18 +77,78 @@ var validarForm = function validarForm() {
         }
     }
 
+    return true;
+};
+
+var generarJSON = function generarJSON() {
+    preguntas = document.getElementsByClassName('quiz-question');
+    var question = void 0;
+
+    var _iteratorNormalCompletion3 = true;
+    var _didIteratorError3 = false;
+    var _iteratorError3 = undefined;
+
+    try {
+        for (var _iterator3 = preguntas[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+            var pregunta = _step3.value;
+
+            question = {};
+            if (!validarPregunta(pregunta)) return false;
+            var select = pregunta.querySelector('select');
+            question["-complexity"] = pregunta.querySelector('input[type=number]').value;
+            question["-subject"] = select.options[select.selectedIndex].value;
+            question.itemBody = {
+                "p": pregunta.querySelector('.question').value
+            };
+            question.correctResponse = {
+                "value": pregunta.querySelector('.answer').value
+            };
+            quizJSON.assessmentItems.assessmentItem.push(question);
+        }
+    } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                _iterator3.return();
+            }
+        } finally {
+            if (_didIteratorError3) {
+                throw _iteratorError3;
+            }
+        }
+    }
+
     writeFile();
     return true;
 };
 
-var addQuestion = function addQuestion(question) {
-    quizJSON.assessmentItems.assessmentItem.push(question);
+var submitFormPHP = function submitFormPHP(e) {
+    e.preventDefault();
+    if (!validarForm()) window.alert("Formulario con campos vacios");else {
+        //TODO: Gestionar el envio de datos v.PHP
+    }
 };
 
-var submitForm = function submitForm(e) {
+var postData = function postData(path) {
+    var newForm = document.createElement("form");
+    newForm.setAttribute("method", 'POST');
+    newForm.setAttribute("action", path);
+    var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", 'vJS');
+    hiddenField.setAttribute("value", JSON.stringify(quizJSON));
+    newForm.appendChild(hiddenField);
+    document.body.appendChild(newForm);
+    newForm.submit();
+};
+var submitFormJS = function submitFormJS(e) {
     e.preventDefault();
-    if (validarForm()) console.log(quizJSON);else window.alert("Formulario con campos vacios");
-    return false;
+    if (validarForm()) {
+        generarJSON();
+        postData('/quiz');
+    } else window.alert("Formulario con campos vacios");
 };
 
 var writeFile = function writeFile() {
@@ -110,7 +159,7 @@ var writeFile = function writeFile() {
 var insertQuestion = function insertQuestion() {
     var count = document.getElementsByClassName('quiz-question').length + 1;
     var questionContent = '\n      <div class="quiz-question-container">\n          <div class="question-pos">' + count + '</div>\n          <input type="text" name="pregunta[]" value="" placeholder="Introduce una nueva pregunta..." class="question" required>\n      </div>\n      <div class="quiz-question--answer">\n          <label for="respuestas[]" class="fa fa-check correct"></label>\n          <input type="text" name="respuestas[]" class="answer" value="" required>\n          <label for="dificultad[]" class="fa fa-tachometer"></label>\n          <input type="number" min="0" max="5" name="dificultad[]" value="0" class="quiz-difficulty">\n          <label for="subject[]" class="fa fa-book"></label>\n          <select class="select-subject" name="">\n            <option value="Internet">Internet</option>\n            <option value="Web">Web</option>\n          </select>\n      </div>\n  ';
-
+    if (!validarForm()) return window.alert('No puedes añadir más preguntas si aún hay sin rellenar');
     var nodeQuestion = document.createElement('div');
     nodeQuestion.classList = "quiz-question";
     nodeQuestion.innerHTML = questionContent;
@@ -129,32 +178,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _form2.default)();
 
 },{"./form.js":1}],3:[function(require,module,exports){
-module.exports={
-  "assessmentItems": {
-    "assessmentItem": [
-      {
-        "-complexity": "2",
-        "-subject": "Web",
-        "itemBody": { "p": "Tag HTML para añadir un formulario" },
-        "correctResponse": {
-        "value": "FORM"
-
-        }
-      },
-      {
-        "-complexity": "4",
-        "-subject": "Internet",
-        "itemBody": {
-          "p": "Este protocolo acabará funcionando incluso entre dos latas unidas por un cordón"
-        },
-        "correctResponse": {
-        "value": "TCP/IP"
-        }
-      }
-    ]
-  }
-}
-
+module.exports={"assessmentItems":{"assessmentItem":[{"-complexity":"5","-subject":"Web","itemBody":{"p":"Tag HTML para añadir un formulario"},"correctResponse":{"value":"FORM"}},{"-complexity":"4","-subject":"Internet","itemBody":{"p":"Este protocolo acabará funcionando incluso entre dos latas unidas por un cordón"},"correctResponse":{"value":"TCP/IP"}},{"-complexity":"2","-subject":"Internet","itemBody":{"p":"asd"},"correctResponse":{"value":"a"}},{"-complexity":"0","-subject":"Internet","itemBody":{"p":"jhc"},"correctResponse":{"value":"jhgc"}},{"-complexity":"4","-subject":"Internet","itemBody":{"p":"ghcv"},"correctResponse":{"value":"32"}}]}}
 },{}]},{},[2])
 
 

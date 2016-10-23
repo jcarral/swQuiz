@@ -17,4 +17,7 @@
     return empty($violations);
   }
 
+  function insertAlertMessage($message, $class){
+      echo "<div class='alert $class'>$message</div>";
+  }
  ?>
