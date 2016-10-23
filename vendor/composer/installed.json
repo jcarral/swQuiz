@@ -1,0 +1,182 @@
+[
+    {
+        "name": "klein/klein",
+        "version": "v2.1.0",
+        "version_normalized": "2.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/klein/klein.php.git",
+            "reference": "5dc073f05adb67ee09680545b4cc7b0590d2559e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/klein/klein.php/zipball/5dc073f05adb67ee09680545b4cc7b0590d2559e",
+            "reference": "5dc073f05adb67ee09680545b4cc7b0590d2559e",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/php-code-coverage": "1.2.x",
+            "phpunit/phpunit": "3.7.x",
+            "squizlabs/php_codesniffer": "1.4.8"
+        },
+        "time": "2014-11-07 07:35:23",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Klein\\": "src/Klein/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Chris O'Hara",
+                "email": "cohara87@gmail.com",
+                "homepage": "http://chris6f.com/",
+                "role": "Creator/Developer"
+            },
+            {
+                "name": "Trevor Suarez",
+                "email": "rican7@gmail.com",
+                "homepage": "http://about.me/tnsuarez",
+                "role": "Contributor/Developer"
+            }
+        ],
+        "description": "A lightning fast router for PHP",
+        "homepage": "https://github.com/chriso/klein.php",
+        "keywords": [
+            "boilerplate",
+            "router",
+            "routing",
+            "sinatra"
+        ]
+    },
+    {
+        "name": "justinrainbow/json-schema",
+        "version": "4.0.0",
+        "version_normalized": "4.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/justinrainbow/json-schema.git",
+            "reference": "31b29546f49524cb0123fb5619107a9306444b60"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/31b29546f49524cb0123fb5619107a9306444b60",
+            "reference": "31b29546f49524cb0123fb5619107a9306444b60",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "json-schema/json-schema-test-suite": "1.2.0",
+            "phpdocumentor/phpdocumentor": "~2",
+            "phpunit/phpunit": "^4.8.22"
+        },
+        "time": "2016-10-10 12:37:37",
+        "bin": [
+            "bin/validate-json"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "JsonSchema\\": "src/JsonSchema/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Bruno Prieto Reis",
+                "email": "bruno.p.reis@gmail.com"
+            },
+            {
+                "name": "Justin Rainbow",
+                "email": "justin.rainbow@gmail.com"
+            },
+            {
+                "name": "Igor Wiedler",
+                "email": "igor@wiedler.ch"
+            },
+            {
+                "name": "Robert Schönthal",
+                "email": "seroscho@googlemail.com"
+            }
+        ],
+        "description": "A library to validate a json schema.",
+        "homepage": "https://github.com/justinrainbow/json-schema",
+        "keywords": [
+            "json",
+            "schema"
+        ]
+    },
+    {
+        "name": "stefk/jval",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/stefk/JVal.git",
+            "reference": "1c26dd2c16e5273d1c0565ff6c9dc51e6316c564"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/stefk/JVal/zipball/1c26dd2c16e5273d1c0565ff6c9dc51e6316c564",
+            "reference": "1c26dd2c16e5273d1c0565ff6c9dc51e6316c564",
+            "shasum": ""
+        },
+        "require": {
+            "ext-mbstring": "*",
+            "php": ">=5.4.1"
+        },
+        "require-dev": {
+            "fabpot/php-cs-fixer": "~1.10",
+            "json-schema/json-schema": "dev-master",
+            "json-schema/test-suite": "dev-master",
+            "phpunit/phpunit": "~4.8"
+        },
+        "time": "2016-09-25 10:45:09",
+        "bin": [
+            "bin/jval"
+        ],
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "JVal\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Stéphane Klein",
+                "email": "stephaneklein221@gmail.com"
+            }
+        ],
+        "description": "JSON Schema validator",
+        "homepage": "https://github.com/stefk/JVal",
+        "keywords": [
+            "JSON Schema",
+            "json",
+            "validation"
+        ]
+    }
+]

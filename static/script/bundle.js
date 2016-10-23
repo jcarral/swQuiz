@@ -1,22 +1,17 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
 exports.default = function () {
-
     form.addEventListener('submit', submitForm);
     btnAddQuestion.addEventListener('click', insertQuestion);
 };
 
 var preguntas = void 0;
-var quizJSON = {
-    "assessmentItems": {
-        "assessmentItem": []
-    }
-};
+var quizJSON = require('../../static/data/questions.json');
 
 //UI elements
 var btnAddQuestion = document.getElementById('newQuestion');
@@ -67,10 +62,14 @@ var validarForm = function validarForm() {
 
             question = {};
             if (!validarPregunta(pregunta)) return false;
-            question["-complexity"] = 2;
-            question["-subject"] = "Prueba";
+            var select = pregunta.querySelector('select');
+            question["-complexity"] = pregunta.querySelector('input[type=number]').value;
+            question["-subject"] = select.options[select.selectedIndex].value;
             question.itemBody = {
-                "p": title
+                "p": pregunta.querySelector('.question').value
+            };
+            question.correctResponse = {
+                "value": pregunta.querySelector('.answer').value
             };
             addQuestion(question);
         }
@@ -89,6 +88,7 @@ var validarForm = function validarForm() {
         }
     }
 
+    writeFile();
     return true;
 };
 
@@ -102,9 +102,14 @@ var submitForm = function submitForm(e) {
     return false;
 };
 
+var writeFile = function writeFile() {
+    var filePath = '/static/data/preguntas.json';
+    var file = new File([JSON.stringify(quizJSON, null, 2)], filePath);
+};
+
 var insertQuestion = function insertQuestion() {
-    var pos = document.getElementsByClassName('quiz-question').length + 1;
-    var questionContent = "\n      <div class=\"quiz-question-container\">\n          <div class=\"question-pos\">" + pos + "</div>\n          <input type=\"text\" name=\"pregunta[]\" value=\"\" placeholder=\"Introduce una nueva pregunta...\" class=\"question\" required>\n      </div>\n      <div class=\"quiz-question--answer\">\n          <label for=\"respuestas[]\" class=\"fa fa-check correct\"></label>\n          <input type=\"text\" name=\"respuestas[]\" class=\"answer\" value=\"\" required>\n          <label for=\"dificultad[]\" class=\"fa fa-tachometer\"></label>\n          <input type=\"number\" min=\"0\" max=\"5\" name=\"dificultad[]\" value=\"0\" class=\"quiz-difficulty\">\n          <label for=\"subject[]\" class=\"fa fa-book\"></label>\n          <select class=\"select-subject\" name=\"\">\n            <option value=\"Internet\">Internet</option>\n            <option value=\"Web\">Web</option>\n          </select>\n      </div>\n  ";
+    var count = document.getElementsByClassName('quiz-question').length + 1;
+    var questionContent = '\n      <div class="quiz-question-container">\n          <div class="question-pos">' + count + '</div>\n          <input type="text" name="pregunta[]" value="" placeholder="Introduce una nueva pregunta..." class="question" required>\n      </div>\n      <div class="quiz-question--answer">\n          <label for="respuestas[]" class="fa fa-check correct"></label>\n          <input type="text" name="respuestas[]" class="answer" value="" required>\n          <label for="dificultad[]" class="fa fa-tachometer"></label>\n          <input type="number" min="0" max="5" name="dificultad[]" value="0" class="quiz-difficulty">\n          <label for="subject[]" class="fa fa-book"></label>\n          <select class="select-subject" name="">\n            <option value="Internet">Internet</option>\n            <option value="Web">Web</option>\n          </select>\n      </div>\n  ';
 
     var nodeQuestion = document.createElement('div');
     nodeQuestion.classList = "quiz-question";
@@ -112,7 +117,7 @@ var insertQuestion = function insertQuestion() {
     form.insertBefore(nodeQuestion, btnAddQuestion);
 };
 
-},{}],2:[function(require,module,exports){
+},{"../../static/data/questions.json":3}],2:[function(require,module,exports){
 'use strict';
 
 var _form = require('./form.js');
@@ -123,7 +128,34 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 (0, _form2.default)();
 
-},{"./form.js":1}]},{},[2])
+},{"./form.js":1}],3:[function(require,module,exports){
+module.exports={
+  "assessmentItems": {
+    "assessmentItem": [
+      {
+        "-complexity": "2",
+        "-subject": "Web",
+        "itemBody": { "p": "Tag HTML para añadir un formulario" },
+        "correctResponse": {
+        "value": "FORM"
+
+        }
+      },
+      {
+        "-complexity": "4",
+        "-subject": "Internet",
+        "itemBody": {
+          "p": "Este protocolo acabará funcionando incluso entre dos latas unidas por un cordón"
+        },
+        "correctResponse": {
+        "value": "TCP/IP"
+        }
+      }
+    ]
+  }
+}
+
+},{}]},{},[2])
 
 
 //# sourceMappingURL=bundle.js.map

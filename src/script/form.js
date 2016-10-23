@@ -1,9 +1,5 @@
 let preguntas
-let quizJSON = {
-    "assessmentItems": {
-        "assessmentItem": []
-    }
-}
+let quizJSON = require('../../static/data/questions.json')
 
 //UI elements
 const btnAddQuestion = document.getElementById('newQuestion')
@@ -25,13 +21,18 @@ const validarForm = () => {
     for (let pregunta of preguntas) {
         question = {}
         if (!validarPregunta(pregunta)) return false
-        question["-complexity"] = 2
-        question["-subject"] = "Prueba"
+        let select = pregunta.querySelector('select')
+        question["-complexity"] = pregunta.querySelector('input[type=number]').value
+        question["-subject"] = select.options[select.selectedIndex].value
         question.itemBody = {
-            "p": title
+            "p": pregunta.querySelector('.question').value
+        }
+        question.correctResponse = {
+            "value": pregunta.querySelector('.answer').value
         }
         addQuestion(question)
     }
+    writeFile()
     return true
 }
 
@@ -47,11 +48,17 @@ const submitForm = function(e) {
 
 }
 
+const writeFile = () => {
+  let filePath = '/static/data/preguntas.json'
+  let file = new File([JSON.stringify(quizJSON, null, 2)], filePath)
+
+}
+
 const insertQuestion = () => {
-    let pos = document.getElementsByClassName('quiz-question').length + 1
+    let count = document.getElementsByClassName('quiz-question').length + 1
     let questionContent = `
       <div class="quiz-question-container">
-          <div class="question-pos">${pos}</div>
+          <div class="question-pos">${count}</div>
           <input type="text" name="pregunta[]" value="" placeholder="Introduce una nueva pregunta..." class="question" required>
       </div>
       <div class="quiz-question--answer">
@@ -75,7 +82,6 @@ const insertQuestion = () => {
 }
 
 export default function() {
-
     form.addEventListener('submit', submitForm)
     btnAddQuestion.addEventListener('click', insertQuestion)
 }

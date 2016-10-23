@@ -1,0 +1,25 @@
+{
+  "assessmentItems": {
+    "assessmentItem": [
+      {
+        "-complexity": "2",
+        "-subject": "Web",
+        "itemBody": { "p": "Tag HTML para añadir un formulario" },
+        "correctResponse": {
+        "value": "FORM"
+
+        }
+      },
+      {
+        "-complexity": "4",
+        "-subject": "Internet",
+        "itemBody": {
+          "p": "Este protocolo acabará funcionando incluso entre dos latas unidas por un cordón"
+        },
+        "correctResponse": {
+        "value": "TCP/IP"
+        }
+      }
+    ]
+  }
+}

@@ -36,3 +36,26 @@
   left: 19px;
   top: 7px;
 }
+
+.btn-addQuestion{
+  padding: 5px 10px;
+  background-color: $mainDarkColor;
+  margin-bottom: 10px;
+  align-self: flex-end;
+  width: 180px;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  i{
+    color: green;
+    display: inline-block;
+  }
+  p{
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    display: inline-block;
+    width: 150px;
+  }
+}

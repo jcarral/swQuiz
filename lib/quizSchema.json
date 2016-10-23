@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "assessmentItems": {
+      "type": "object",
+      "properties": {
+        "assessmentItem": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "-complexity": {
+                "type": "string"
+              },
+              "-subject": {
+                "type": "string"
+              },
+              "itemBody": {
+                "type": "object",
+                "properties": {
+                  "p": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "p"
+                ]
+              },
+              "correctResponse": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "value"
+                ]
+              }
+            },
+            "required": [
+              "-complexity",
+              "-subject",
+              "itemBody",
+              "correctResponse"
+            ]
+          }
+        }
+      },
+      "required": [
+        "assessmentItem"
+      ]
+    }
+  },
+  "required": [
+    "assessmentItems"
+  ]
+}
