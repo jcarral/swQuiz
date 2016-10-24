@@ -45,7 +45,8 @@
   width: 180px;
   cursor: pointer;
   text-decoration: none;
-  display: block;
+  display: inline-block;
+  transition: all 0.25s ease;
   i{
     color: green;
     display: inline-block;
@@ -57,6 +58,16 @@
     margin: 0;
     display: inline-block;
     width: 150px;
+  }
+  &:hover{
+    background-color: darken($mainDarkColor, 10%);
+  }
+}
+
+.btn-viewJson{
+  i{
+    color: #2c2d2c;
+    font-weight: bold;
   }
 }
 

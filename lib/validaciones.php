@@ -8,6 +8,7 @@
   }
 
   function validString($data){
+    if(!is_array($data)) return false;
     foreach ($data as $item) {
       if(strlen(trim($item)) == 0) return false;
     }
@@ -15,9 +16,10 @@
   }
 
   function validNumber($data, $min, $max){
+    if(!is_array($data)) return false;
     foreach ($data as $item) {
-      $number = intval($item);
-      if($number < $min || $number > $max) return false;
+      $number = intval($item, 10);
+      if(strlen($item) > 1 || $number < $min || $number > $max) return false;
     }
     return true;
   }

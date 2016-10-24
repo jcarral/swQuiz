@@ -2,6 +2,13 @@
   <i class="fa fa-plus"></i>
   <p  class="">Añadir pregunta/s</p>
 </a>
+
+<a href="/api/questions"class="btn-addQuestion btn-viewJson">
+  <i class="">{&nbsp;}</i>
+  <p  class="">Ver JSON</p>
+</a>
+
+
 <div class="table" id="table-quiz">
   <div class="row header">
     <div class="cell">
