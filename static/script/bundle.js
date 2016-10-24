@@ -4,13 +4,6 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-exports.default = function () {
-    form.addEventListener('submit', submitFormPHP);
-    btnAddQuestion.addEventListener('click', insertQuestion);
-    btnSendJS.addEventListener('click', submitFormJS);
-};
-
 var preguntas = void 0;
 var quizJSON = require('../../static/data/questions.json');
 
@@ -120,7 +113,6 @@ var generarJSON = function generarJSON() {
         }
     }
 
-    writeFile();
     return true;
 };
 
@@ -145,16 +137,12 @@ var postData = function postData(path) {
     newForm.submit();
 };
 var submitFormJS = function submitFormJS(e) {
+
     e.preventDefault();
     if (validarForm()) {
         generarJSON();
         postData('/quiz');
     } else window.alert("Formulario con campos vacios");
-};
-
-var writeFile = function writeFile() {
-    var filePath = '/static/data/preguntas.json';
-    var file = new File([JSON.stringify(quizJSON, null, 2)], filePath);
 };
 
 var insertQuestion = function insertQuestion() {
@@ -167,169 +155,95 @@ var insertQuestion = function insertQuestion() {
     form.insertBefore(nodeQuestion, btnAddQuestion);
 };
 
-},{"../../static/data/questions.json":3}],2:[function(require,module,exports){
+var setForm = exports.setForm = function setForm() {
+    if (form === null || form === undefined) return false; //Que siga ejecutando el main, no estas en la página
+    form.addEventListener('submit', submitFormPHP);
+    btnAddQuestion.addEventListener('click', insertQuestion);
+    btnSendJS.addEventListener('click', submitFormJS);
+};
+
+},{"../../static/data/questions.json":4}],2:[function(require,module,exports){
 'use strict';
 
 var _form = require('./form.js');
 
-var _form2 = _interopRequireDefault(_form);
+var _table = require('./table.js');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+(0, _table.setTable)();
+(0, _form.setForm)();
 
-(0, _form2.default)();
+},{"./form.js":1,"./table.js":3}],3:[function(require,module,exports){
+'use strict';
 
-},{"./form.js":1}],3:[function(require,module,exports){
-module.exports={
-    "assessmentItems": {
-        "assessmentItem": [{
-            "-complexity": "2",
-            "-subject": "Web",
-            "itemBody": {
-                "p": "Tag HTML para añadir un formulario"
-            },
-            "correctResponse": {
-                "value": "FORM"
-            }
-        }, {
-            "-complexity": "4",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "Este protocolo acabará funcionando incluso entre dos latas unidas por un cordón"
-            },
-            "correctResponse": {
-                "value": "TCP/IP"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "Preg1"
-            },
-            "correctResponse": {
-                "value": "Res1"
-            }
-        }, {
-            "-complexity": "2",
-            "-subject": "Web",
-            "itemBody": {
-                "p": "Preg2"
-            },
-            "correctResponse": {
-                "value": "Res2"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "Voy a validar con JS"
-            },
-            "correctResponse": {
-                "value": "Y te cuelo un 0"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "Los 0 no pasan "
-            },
-            "correctResponse": {
-                "value": "Solo 1"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "Me apetece joder la tabla "
-            },
-            "correctResponse": {
-                "value": "Voy a descuadrarla a ver que pasa, si pongo una respuesta larga se va a tomar por culo? Puto css"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "jgc"
-            },
-            "correctResponse": {
-                "value": "jgc"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "cjkjn"
-            },
-            "correctResponse": {
-                "value": "124"
-            }
-        }, {
-            "-complexity": "3",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "dfhjk"
-            },
-            "correctResponse": {
-                "value": "va con php..."
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "jgc"
-            },
-            "correctResponse": {
-                "value": "jgc"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "cjkjn"
-            },
-            "correctResponse": {
-                "value": "124"
-            }
-        }, {
-            "-complexity": "3",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "dfhjk"
-            },
-            "correctResponse": {
-                "value": "va con php..."
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "Va<sa<ac"
-            },
-            "correctResponse": {
-                "value": "sdasd"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "sadad"
-            },
-            "correctResponse": {
-                "value": "asdas"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "122131"
-            },
-            "correctResponse": {
-                "value": "SASDASD"
-            }
-        }]
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+
+//UI elements
+var table = document.getElementById('table-quiz');
+
+var addRow = function addRow(data) {
+  var row = '';
+  data.forEach(function (value, i) {
+    row += i === 2 ? '<div class="cell cell-answer">' + value + '</div>' : '<div class="cell">' + value + '</div>';
+  });
+  return row;
+};
+
+var getJSONPost = function getJSONPost() {
+  return new Promise(function (resolve, reject) {
+    var http = new XMLHttpRequest();
+    var url = "/api/questions";
+    http.open("POST", url, true);
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http.onreadystatechange = function () {
+      if (http.readyState == 4 && http.status == 200) {
+        resolve(http.responseText);
+      }
+    };
+    http.send();
+  });
+};
+
+var fillTable = function fillTable() {
+  if (table === null || table === undefined) return false; //Para que se siga ejecutando si no es la pagina
+  getJSONPost().then(function (data) {
+    data = JSON.parse(data);
+    var questions = data.assessmentItems.assessmentItem;
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = questions[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var question = _step.value;
+
+        var row = document.createElement('div');
+        row.classList += ' row';
+        var _data = [question['itemBody']['p'], question['-complexity'], question['correctResponse']['value'], question['-subject']];
+        row.innerHTML = addRow(_data);
+        table.appendChild(row);
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
     }
-}
+  });
+};
 
-},{}]},{},[2])
+var setTable = exports.setTable = fillTable;
 
-
-//# sourceMappingURL=bundle.js.map
+},{}],4:[function(require,module,exports){
+module.exports={"assessmentItems":{"assessmentItem":[{"-complexity":"2","-subject":"Web","itemBody":{"p":"Tag HTML para añadir un formulario"},"correctResponse":{"value":"FORM"}},{"-complexity":"4","-subject":"Internet","itemBody":{"p":"Este protocolo acabará funcionando incluso entre dos latas unidas por un cordón"},"correctResponse":{"value":"TCP/IP"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Preg1"},"correctResponse":{"value":"Res1"}},{"-complexity":"2","-subject":"Web","itemBody":{"p":"Preg2"},"correctResponse":{"value":"Res2"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Voy a validar con JS"},"correctResponse":{"value":"Y te cuelo un 0"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Los 0 no pasan "},"correctResponse":{"value":"Solo 1"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Me apetece joder la tabla "},"correctResponse":{"value":"Voy a descuadrarla a ver que pasa, si pongo una respuesta larga se va a tomar por culo? Puto css"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"jgc"},"correctResponse":{"value":"jgc"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"cjkjn"},"correctResponse":{"value":"124"}},{"-complexity":"3","-subject":"Internet","itemBody":{"p":"dfhjk"},"correctResponse":{"value":"va con php..."}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"jgc"},"correctResponse":{"value":"jgc"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"cjkjn"},"correctResponse":{"value":"124"}},{"-complexity":"3","-subject":"Internet","itemBody":{"p":"dfhjk"},"correctResponse":{"value":"va con php..."}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"sadad"},"correctResponse":{"value":"asdas"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"122131"},"correctResponse":{"value":"SASDASD"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"as"},"correctResponse":{"value":"aSas&lt;h1&gt;"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"&lt;h1&gt; Te la cuelo? &lt;/h1&gt;"},"correctResponse":{"value":"NO!"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Pregunta JS"},"correctResponse":{"value":"Ahí va una"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"dzsdas"},"correctResponse":{"value":"1212"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Pregunta nueva"},"correctResponse":{"value":"respuesta vieja"}}]}}
+},{}]},{},[2]);

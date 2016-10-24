@@ -34,7 +34,6 @@
     </footer>
 
     <script src="/static/script/bundle.js"></script>
-
 </body>
 
 </html>

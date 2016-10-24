@@ -1,3 +1,5 @@
-import form from './form.js'
+import {setForm} from './form.js'
+import {setTable} from './table.js'
 
-form()
+ setTable()
+ setForm()

@@ -42,7 +42,7 @@ const generarJSON = () => {
       }
       quizJSON.assessmentItems.assessmentItem.push(question)
   }
-  writeFile()
+  
   return true
 }
 
@@ -69,6 +69,7 @@ const postData = (path) => {
     newForm.submit()
 }
 const submitFormJS = function(e) {
+
   e.preventDefault()
   if(validarForm()){
     generarJSON()
@@ -77,11 +78,6 @@ const submitFormJS = function(e) {
   else window.alert("Formulario con campos vacios")
 }
 
-const writeFile = () => {
-  let filePath = '/static/data/preguntas.json'
-  let file = new File([JSON.stringify(quizJSON, null, 2)], filePath)
-
-}
 
 const insertQuestion = () => {
     let count = document.getElementsByClassName('quiz-question').length + 1
@@ -110,8 +106,10 @@ const insertQuestion = () => {
 
 }
 
-export default function() {
+export const setForm = () => {
+    if(form === null || form === undefined) return false //Que siga ejecutando el main, no estas en la página
     form.addEventListener('submit', submitFormPHP)
     btnAddQuestion.addEventListener('click', insertQuestion)
     btnSendJS.addEventListener('click', submitFormJS)
+
 }

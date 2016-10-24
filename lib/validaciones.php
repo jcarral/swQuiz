@@ -4,9 +4,6 @@
         && ((count($data["pregunta"]) == count($data["respuesta"]))
           && (count($data["respuesta"]) == count($data["dificultad"]))
           && (count($data["dificultad"]) == count($data["subject"])));
-          echo "<pre>";
-          var_dump($data);
-          echo "</pre>";
           return $var;
   }
 
@@ -33,9 +30,8 @@
       && validNumber($data["dificultad"], 1, 5);
   }
 
-  function validateSchema($path){
+  function validateSchema($json){
     $jsonSchemaObject = json_decode(file_get_contents(__DIR__ . "/quizSchema.json"));
-    $json = json_decode(file_get_contents($path));
     $validator = JVal\Validator::buildDefault();
     $violations = $validator->validate($json, $jsonSchemaObject);
     return empty($violations);
