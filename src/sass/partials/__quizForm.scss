@@ -1,6 +1,7 @@
 .quiz {
     display: flex;
     flex-flow: column;
+    counter-reset: my-badass-counter;
 
     &-title {
         color: $mainDarkColor;
@@ -26,6 +27,7 @@
 
         &-container {
             display: flex;
+
         }
 
         &--answer {
@@ -75,6 +77,17 @@
         font-size: 2em;
         color: white;
         font-weight: bolder;
+        position: relative;
+        &:before{
+          content: counter(my-badass-counter);
+          counter-increment: my-badass-counter;
+          font-size: 1em;
+          color: white;
+          font-weight: bolder;
+          position: absolute;
+          bottom: 0px;
+          left: 23px;
+        }
     }
 }
 

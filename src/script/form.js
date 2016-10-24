@@ -80,10 +80,9 @@ const submitFormJS = function(e) {
 
 
 const insertQuestion = () => {
-    let count = document.getElementsByClassName('quiz-question').length + 1
     let questionContent = `
       <div class="quiz-question-container">
-          <div class="question-pos">${count}</div>
+          <div class="question-pos"></div>
           <input type="text" name="pregunta[]" value="" placeholder="Introduce una nueva pregunta..." class="question" required>
       </div>
   `

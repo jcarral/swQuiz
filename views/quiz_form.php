@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <form method="POST" action="" class="quiz" id="formQuiz">
     <div class="quiz-question">
         <div class="quiz-question-container">
-            <div class="question-pos">1</div>
+            <div class="question-pos"></div>
             <input type="text" name="pregunta[]" value="" placeholder="Introduce una nueva pregunta..." class="question" required>
         </div>
         <div class="quiz-question--answer">
