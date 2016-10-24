@@ -10,7 +10,7 @@
   }
 
   function insertAlertMessage($message, $class){
-      echo "<div class='alert $class'>$message</div>";
+      echo "<div class='alert $class'><p>$message</p><a href='/' class='fa fa-hand-o-right'> Ir a ver preguntas </a></div>";
   }
 
   function addDataToJSON($data, $filePath){

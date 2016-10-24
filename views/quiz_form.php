@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   insertAlertMessage($message, $class);
 }
  ?>
-<h3 class="container-title">Inserta las preguntas nuevas:</h3>
+<h3 class="container-title quiz-title">Inserta las preguntas nuevas:</h3>
 <form method="POST" action="" class="quiz" id="formQuiz">
     <div class="quiz-question">
         <div class="quiz-question-container">
@@ -46,6 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <select class="select-subject" name="subject[]">
               <option value="Internet">Internet</option>
               <option value="Web">Web</option>
+              <option value="Subject3">Subject3</option>
+              <option value="Subject4">Subject4</option>
+              <option value="Subject5">Subject5</option>
+              <option value="Subject6">Subject6</option>
             </select>
         </div>
     </div>

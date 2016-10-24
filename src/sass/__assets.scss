@@ -59,3 +59,26 @@
     width: 150px;
   }
 }
+
+.alert{
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  min-height: 64px;
+  padding: 1em;
+  display: flex;
+  flex-flow: column wrap;
+
+  &.error{
+    background-color: $redColor;
+  }
+
+  &.success{
+    background-color: $greenColor;
+  }
+
+  a{
+    align-self: flex-end;
+    color: black;
+    font-weight: bold;
+  }
+}

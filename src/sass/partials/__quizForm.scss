@@ -2,14 +2,30 @@
     display: flex;
     flex-flow: column;
 
+    &-title {
+        color: $mainDarkColor;
+        font-family: 'Open Sans Condensed', sans-serif;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 64px;
+        margin: 0;
+        padding: 20px 30px;
+        text-align: center;
+        text-transform: uppercase;
+        padding-bottom: 5px;
+
+        margin-bottom: 16px;
+        position: relative;
+    }
+
     &-question {
         display: flex;
         flex-flow: column;
         justify-content: center;
         margin-bottom: 2em;
 
-        &-container{
-          display: flex;
+        &-container {
+            display: flex;
         }
 
         &--answer {
@@ -17,7 +33,7 @@
             height: 30px;
             margin-bottom: 5px;
 
-            &>label {
+            & > label {
                 width: 30px;
                 height: 100%;
                 background-color: $mainDarkColor;
@@ -25,13 +41,22 @@
                 line-height: 30px;
                 margin-left: 10px;
             }
+
+          &-delete{
+            padding: 5px 7px;
+            margin-left: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: $redColor;
+          }
         }
     }
 }
 
 .question {
     width: 100%;
-    padding: .5em 0;
+    padding: 0.5em 0;
     font-size: 1.5em;
     border: none;
     border-bottom: 2px solid $mainDarkColor;
@@ -41,24 +66,22 @@
     margin-bottom: 1em;
     box-sizing: border-box;
 
-    &-pos{
-      width: 66px;
-      height: 66px;
-      background-color: $mainDarkColor;
-      text-align: center;
-      line-height: 66px;
-      font-size: 2em;
-      color: white;
-      font-weight: bolder;
+    &-pos {
+        width: 66px;
+        height: 66px;
+        background-color: $mainDarkColor;
+        text-align: center;
+        line-height: 66px;
+        font-size: 2em;
+        color: white;
+        font-weight: bolder;
     }
-
-
 }
 
 .answer {
     box-sizing: border-box;
     width: 450px;
-    padding: .5em 0;
+    padding: 0.5em 0;
     font-size: 1em;
     border: none;
     border-bottom: 1px solid #eaeaea;
@@ -66,72 +89,76 @@
     padding-left: 1.25em;
     color: #757575;
 
-    &:focus{
-      outline: none;
+    &:focus {
+        outline: none;
     }
 }
 
-.correct{
-  color: #4CAF50 !important;
-  margin-left: 0 !important;
+.correct {
+    color: #4CAF50 !important;
+    margin-left: 0 !important;
 }
 
-.wrong{
-  color: #FF3D00;
+.wrong {
+    color: #FF3D00;
 }
 
-select{
-  -webkit-appearance: none;
-    -webkit-border-radius: 0px;
+select {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
 }
 
-.select-subject{
-  background-color: #2196F3;
-  height: 30px;
-  width: 300px;
-  border-radius: 0;
-  border: 0;
-  padding-left: 10px;
-  color: white;
+.select-subject {
+    background-color: #2196F3;
+    height: 30px;
+    width: 268px;
+    border-radius: 0;
+    border: 0;
+    padding-left: 10px;
+    color: white;
 }
 
-.quiz-difficulty{
-  width: 120px;
-  height: 30px;
-  border: 0;
-  border-bottom: 1px solid #eaeaea;
-  box-sizing: border-box;
-  padding-left: 10px;
+.quiz-difficulty {
+    width: 120px;
+    height: 30px;
+    border: 0;
+    border-bottom: 1px solid #eaeaea;
+    box-sizing: border-box;
+    padding-left: 10px;
 }
 
-.btn-submit{
-  width: 50%;
-  height: 30px;
-  color: white;
-  border: none;
-  cursor: pointer;
-  display: inline;
-  box-sizing: border-box;
-  font-size: 1em;
-  transition: all 0.25s ease;
-}
-.php-submit{
-  background-color: $mainDarkColor;
-  &:hover{
-    background-color: darken($mainDarkColor, 10%);
-  }
+.btn-submit {
+    width: 50%;
+    height: 30px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: inline;
+    box-sizing: border-box;
+    font-size: 1em;
+    transition: all 0.25s ease;
 }
 
-.js-submit{
-  background-color: $pinkColor;
-  &:hover{
-    background-color: darken($pinkColor, 10%);
-  }
+.php-submit {
+    background-color: $mainDarkColor;
+
+    &:hover {
+        background-color: darken($mainDarkColor, 10%);
+    }
 }
 
-.quiz-submit{
-  display: flex;
+.js-submit {
+    background-color: $pinkColor;
+
+    &:hover {
+        background-color: darken($pinkColor, 10%);
+    }
 }
-label.fa{
-  color: white;
+
+.quiz-submit {
+    display: flex;
+}
+
+label.fa {
+    color: white;
 }

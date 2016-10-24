@@ -42,7 +42,7 @@ const generarJSON = () => {
       }
       quizJSON.assessmentItems.assessmentItem.push(question)
   }
-  
+
   return true
 }
 
@@ -86,24 +86,42 @@ const insertQuestion = () => {
           <div class="question-pos">${count}</div>
           <input type="text" name="pregunta[]" value="" placeholder="Introduce una nueva pregunta..." class="question" required>
       </div>
-      <div class="quiz-question--answer">
-          <label for="respuestas[]" class="fa fa-check correct"></label>
-          <input type="text" name="respuesta[]" class="answer" value="" required>
-          <label for="dificultad[]" class="fa fa-tachometer"></label>
-          <input type="number" min="1" max="5" name="dificultad[]" value="0" class="quiz-difficulty">
-          <label for="subject[]" class="fa fa-book"></label>
-          <select class="select-subject" name="subject[]">
-            <option value="Internet">Internet</option>
-            <option value="Web">Web</option>
-          </select>
-      </div>
   `
+
+  let answerContent = `<label for="respuestas[]" class="fa fa-check correct"></label>
+    <input type="text" name="respuesta[]" class="answer" value="" required>
+    <label for="dificultad[]" class="fa fa-tachometer"></label>
+    <input type="number" min="1" max="5" name="dificultad[]" value="1" class="quiz-difficulty">
+    <label for="subject[]" class="fa fa-book"></label>
+    <select class="select-subject" name="subject[]">
+      <option value="Internet">Internet</option>
+      <option value="Web">Web</option>
+      <option value="Subject3">Subject3</option>
+      <option value="Subject4">Subject4</option>
+      <option value="Subject5">Subject5</option>
+      <option value="Subject6">Subject6</option>
+    </select>`
     if(!validarForm()) return window.alert('No puedes añadir más preguntas si aún hay sin rellenar')
+    let deleteBtn = document.createElement('div')
     let nodeQuestion = document.createElement('div')
+    let questionAnswerBox = document.createElement('div')
+
+    questionAnswerBox.classList = 'quiz-question--answer'
+    questionAnswerBox.innerHTML = answerContent
+    deleteBtn.classList = 'quiz-question--answer-delete fa fa-trash'
+    deleteBtn.addEventListener('click', removeQuestion)
+    questionAnswerBox.appendChild(deleteBtn)
     nodeQuestion.classList = "quiz-question"
     nodeQuestion.innerHTML = questionContent
+    nodeQuestion.appendChild(questionAnswerBox)
     form.insertBefore(nodeQuestion, btnAddQuestion)
+}
 
+const removeQuestion = function(e){
+  e.target.parentElement.parentElement.remove();
+}
+Element.prototype.remove = function() {
+    this.parentElement.removeChild(this);
 }
 
 export const setForm = () => {

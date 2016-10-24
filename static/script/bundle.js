@@ -147,12 +147,30 @@ var submitFormJS = function submitFormJS(e) {
 
 var insertQuestion = function insertQuestion() {
     var count = document.getElementsByClassName('quiz-question').length + 1;
-    var questionContent = '\n      <div class="quiz-question-container">\n          <div class="question-pos">' + count + '</div>\n          <input type="text" name="pregunta[]" value="" placeholder="Introduce una nueva pregunta..." class="question" required>\n      </div>\n      <div class="quiz-question--answer">\n          <label for="respuestas[]" class="fa fa-check correct"></label>\n          <input type="text" name="respuesta[]" class="answer" value="" required>\n          <label for="dificultad[]" class="fa fa-tachometer"></label>\n          <input type="number" min="1" max="5" name="dificultad[]" value="0" class="quiz-difficulty">\n          <label for="subject[]" class="fa fa-book"></label>\n          <select class="select-subject" name="subject[]">\n            <option value="Internet">Internet</option>\n            <option value="Web">Web</option>\n          </select>\n      </div>\n  ';
+    var questionContent = '\n      <div class="quiz-question-container">\n          <div class="question-pos">' + count + '</div>\n          <input type="text" name="pregunta[]" value="" placeholder="Introduce una nueva pregunta..." class="question" required>\n      </div>\n  ';
+
+    var answerContent = '<label for="respuestas[]" class="fa fa-check correct"></label>\n    <input type="text" name="respuesta[]" class="answer" value="" required>\n    <label for="dificultad[]" class="fa fa-tachometer"></label>\n    <input type="number" min="1" max="5" name="dificultad[]" value="1" class="quiz-difficulty">\n    <label for="subject[]" class="fa fa-book"></label>\n    <select class="select-subject" name="subject[]">\n      <option value="Internet">Internet</option>\n      <option value="Web">Web</option>\n      <option value="Subject3">Subject3</option>\n      <option value="Subject4">Subject4</option>\n      <option value="Subject5">Subject5</option>\n      <option value="Subject6">Subject6</option>\n    </select>';
     if (!validarForm()) return window.alert('No puedes añadir más preguntas si aún hay sin rellenar');
+    var deleteBtn = document.createElement('div');
     var nodeQuestion = document.createElement('div');
+    var questionAnswerBox = document.createElement('div');
+
+    questionAnswerBox.classList = 'quiz-question--answer';
+    questionAnswerBox.innerHTML = answerContent;
+    deleteBtn.classList = 'quiz-question--answer-delete fa fa-trash';
+    deleteBtn.addEventListener('click', removeQuestion);
+    questionAnswerBox.appendChild(deleteBtn);
     nodeQuestion.classList = "quiz-question";
     nodeQuestion.innerHTML = questionContent;
+    nodeQuestion.appendChild(questionAnswerBox);
     form.insertBefore(nodeQuestion, btnAddQuestion);
+};
+
+var removeQuestion = function removeQuestion(e) {
+    e.target.parentElement.parentElement.remove();
+};
+Element.prototype.remove = function () {
+    this.parentElement.removeChild(this);
 };
 
 var setForm = exports.setForm = function setForm() {
@@ -176,39 +194,35 @@ var _table = require('./table.js');
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
-
-
 //UI elements
 var table = document.getElementById('table-quiz');
 
 var addRow = function addRow(data) {
-  var row = '';
-  data.forEach(function (value, i) {
-    row += i === 2 ? '<div class="cell cell-answer">' + value + '</div>' : '<div class="cell">' + value + '</div>';
-  });
-  return row;
+    var row = '';
+    data.forEach(function (value, i) {
+        row += i === 2 ? '<div class="cell cell-answer">' + value + '</div>' : '<div class="cell">' + value + '</div>';
+    });
+    return row;
 };
 
 var getJSONPost = function getJSONPost() {
-  return new Promise(function (resolve, reject) {
-    var http = new XMLHttpRequest();
-    var url = "/api/questions";
-    http.open("POST", url, true);
-    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    http.onreadystatechange = function () {
-      if (http.readyState == 4 && http.status == 200) {
-        resolve(http.responseText);
-      }
-    };
-    http.send();
-  });
+    return new Promise(function (resolve, reject) {
+        var http = new XMLHttpRequest();
+        var url = "/api/questions";
+        http.open("POST", url, true);
+        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        http.onreadystatechange = function () {
+            if (http.readyState == 4 && http.status == 200) {
+                resolve(http.responseText);
+            }
+        };
+        http.send();
+    });
 };
 
-var fillTable = function fillTable() {
-  if (table === null || table === undefined) return false; //Para que se siga ejecutando si no es la pagina
-  getJSONPost().then(function (data) {
+var fillTable = function fillTable(data) {
     data = JSON.parse(data);
     var questions = data.assessmentItems.assessmentItem;
     var _iteratorNormalCompletion = true;
@@ -216,34 +230,40 @@ var fillTable = function fillTable() {
     var _iteratorError = undefined;
 
     try {
-      for (var _iterator = questions[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var question = _step.value;
+        for (var _iterator = questions[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var question = _step.value;
 
-        var row = document.createElement('div');
-        row.classList += ' row';
-        var _data = [question['itemBody']['p'], question['-complexity'], question['correctResponse']['value'], question['-subject']];
-        row.innerHTML = addRow(_data);
-        table.appendChild(row);
-      }
+            var row = document.createElement('div');
+            row.classList += ' row';
+            var _data = [question['itemBody']['p'], question['-complexity'], question['correctResponse']['value'], question['-subject']];
+            row.innerHTML = addRow(_data);
+            table.appendChild(row);
+        }
     } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
+        _didIteratorError = true;
+        _iteratorError = err;
     } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
         }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
     }
-  });
 };
 
-var setTable = exports.setTable = fillTable;
+var addTable = function addTable() {
+    if (table === null || table === undefined) return false; //Para que se siga ejecutando si no es la pagina
+    getJSONPost().then(function (data) {
+        fillTable(data);
+    });
+};
+
+var setTable = exports.setTable = addTable;
 
 },{}],4:[function(require,module,exports){
-module.exports={"assessmentItems":{"assessmentItem":[{"-complexity":"2","-subject":"Web","itemBody":{"p":"Tag HTML para añadir un formulario"},"correctResponse":{"value":"FORM"}},{"-complexity":"4","-subject":"Internet","itemBody":{"p":"Este protocolo acabará funcionando incluso entre dos latas unidas por un cordón"},"correctResponse":{"value":"TCP/IP"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Preg1"},"correctResponse":{"value":"Res1"}},{"-complexity":"2","-subject":"Web","itemBody":{"p":"Preg2"},"correctResponse":{"value":"Res2"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Voy a validar con JS"},"correctResponse":{"value":"Y te cuelo un 0"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Los 0 no pasan "},"correctResponse":{"value":"Solo 1"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Me apetece joder la tabla "},"correctResponse":{"value":"Voy a descuadrarla a ver que pasa, si pongo una respuesta larga se va a tomar por culo? Puto css"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"jgc"},"correctResponse":{"value":"jgc"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"cjkjn"},"correctResponse":{"value":"124"}},{"-complexity":"3","-subject":"Internet","itemBody":{"p":"dfhjk"},"correctResponse":{"value":"va con php..."}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"jgc"},"correctResponse":{"value":"jgc"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"cjkjn"},"correctResponse":{"value":"124"}},{"-complexity":"3","-subject":"Internet","itemBody":{"p":"dfhjk"},"correctResponse":{"value":"va con php..."}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"sadad"},"correctResponse":{"value":"asdas"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"122131"},"correctResponse":{"value":"SASDASD"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"as"},"correctResponse":{"value":"aSas&lt;h1&gt;"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"&lt;h1&gt; Te la cuelo? &lt;/h1&gt;"},"correctResponse":{"value":"NO!"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Pregunta JS"},"correctResponse":{"value":"Ahí va una"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"dzsdas"},"correctResponse":{"value":"1212"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Pregunta nueva"},"correctResponse":{"value":"respuesta vieja"}}]}}
+module.exports={"assessmentItems":{"assessmentItem":[{"-complexity":"2","-subject":"Web","itemBody":{"p":"Tag HTML para a\u00f1adir un formulario"},"correctResponse":{"value":"FORM"}},{"-complexity":"4","-subject":"Internet","itemBody":{"p":"Este protocolo acabar\u00e1 funcionando incluso entre dos latas unidas por un cord\u00f3n"},"correctResponse":{"value":"TCP\/IP"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Preg1"},"correctResponse":{"value":"Res1"}},{"-complexity":"2","-subject":"Web","itemBody":{"p":"Preg2"},"correctResponse":{"value":"Res2"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Voy a validar con JS"},"correctResponse":{"value":"Y te cuelo un 0"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Los 0 no pasan "},"correctResponse":{"value":"Solo 1"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Me apetece joder la tabla "},"correctResponse":{"value":"Voy a descuadrarla a ver que pasa, si pongo una respuesta larga se va a tomar por culo? Puto css"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"jgc"},"correctResponse":{"value":"jgc"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"cjkjn"},"correctResponse":{"value":"124"}},{"-complexity":"3","-subject":"Internet","itemBody":{"p":"dfhjk"},"correctResponse":{"value":"va con php..."}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"jgc"},"correctResponse":{"value":"jgc"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"cjkjn"},"correctResponse":{"value":"124"}},{"-complexity":"3","-subject":"Internet","itemBody":{"p":"dfhjk"},"correctResponse":{"value":"va con php..."}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"sadad"},"correctResponse":{"value":"asdas"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"122131"},"correctResponse":{"value":"SASDASD"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"as"},"correctResponse":{"value":"aSas&lt;h1&gt;"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"&lt;h1&gt; Te la cuelo? &lt;\/h1&gt;"},"correctResponse":{"value":"NO!"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Pregunta JS"},"correctResponse":{"value":"Ah\u00ed va una"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"dzsdas"},"correctResponse":{"value":"1212"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Pregunta nueva"},"correctResponse":{"value":"respuesta vieja"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"ss"},"correctResponse":{"value":"ss"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"ad"},"correctResponse":{"value":"aa"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"as"},"correctResponse":{"value":"as"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"as"},"correctResponse":{"value":"as"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"as"},"correctResponse":{"value":"as"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Preg1"},"correctResponse":{"value":"asd"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"Preg1"},"correctResponse":{"value":"Una respuesta"}},{"-complexity":"1","-subject":"Internet","itemBody":{"p":"asas"},"correctResponse":{"value":"asas"}}]}}
 },{}]},{},[2]);
