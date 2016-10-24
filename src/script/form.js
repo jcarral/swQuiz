@@ -1,5 +1,10 @@
 let preguntas
-let quizJSON = require('../../static/data/questions.json')
+let quizJSON = {
+  "assessmentItems": {
+    "assessmentItem": [
+    ]
+  }
+}
 
 //UI elements
 const btnAddQuestion = document.getElementById('newQuestion')

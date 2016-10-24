@@ -1,11 +1,15 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 var preguntas = void 0;
-var quizJSON = require('../../static/data/questions.json');
+var quizJSON = {
+    "assessmentItems": {
+        "assessmentItem": []
+    }
+};
 
 //UI elements
 var btnAddQuestion = document.getElementById('newQuestion');
@@ -146,9 +150,9 @@ var submitFormJS = function submitFormJS(e) {
 };
 
 var insertQuestion = function insertQuestion() {
-    var questionContent = '\n      <div class="quiz-question-container">\n          <div class="question-pos"></div>\n          <input type="text" name="pregunta[]" value="" placeholder="Introduce una nueva pregunta..." class="question" required>\n      </div>\n  ';
+    var questionContent = "\n      <div class=\"quiz-question-container\">\n          <div class=\"question-pos\"></div>\n          <input type=\"text\" name=\"pregunta[]\" value=\"\" placeholder=\"Introduce una nueva pregunta...\" class=\"question\" required>\n      </div>\n  ";
 
-    var answerContent = '<label for="respuestas[]" class="fa fa-check correct"></label>\n    <input type="text" name="respuesta[]" class="answer" value="" required>\n    <label for="dificultad[]" class="fa fa-tachometer"></label>\n    <input type="number" min="1" max="5" name="dificultad[]" value="1" class="quiz-difficulty">\n    <label for="subject[]" class="fa fa-book"></label>\n    <select class="select-subject" name="subject[]">\n      <option value="Internet">Internet</option>\n      <option value="Web">Web</option>\n      <option value="Subject3">Subject3</option>\n      <option value="Subject4">Subject4</option>\n      <option value="Subject5">Subject5</option>\n      <option value="Subject6">Subject6</option>\n    </select>';
+    var answerContent = "<label for=\"respuestas[]\" class=\"fa fa-check correct\"></label>\n    <input type=\"text\" name=\"respuesta[]\" class=\"answer\" value=\"\" required>\n    <label for=\"dificultad[]\" class=\"fa fa-tachometer\"></label>\n    <input type=\"number\" min=\"1\" max=\"5\" name=\"dificultad[]\" value=\"1\" class=\"quiz-difficulty\">\n    <label for=\"subject[]\" class=\"fa fa-book\"></label>\n    <select class=\"select-subject\" name=\"subject[]\">\n      <option value=\"Internet\">Internet</option>\n      <option value=\"Web\">Web</option>\n      <option value=\"Subject3\">Subject3</option>\n      <option value=\"Subject4\">Subject4</option>\n      <option value=\"Subject5\">Subject5</option>\n      <option value=\"Subject6\">Subject6</option>\n    </select>";
     if (!validarForm()) return window.alert('No puedes añadir más preguntas si aún hay sin rellenar');
     var deleteBtn = document.createElement('div');
     var nodeQuestion = document.createElement('div');
@@ -179,7 +183,7 @@ var setForm = exports.setForm = function setForm() {
     btnSendJS.addEventListener('click', submitFormJS);
 };
 
-},{"../../static/data/questions.json":4}],2:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 'use strict';
 
 var _form = require('./form.js');
@@ -262,165 +266,5 @@ var addTable = function addTable() {
 };
 
 var setTable = exports.setTable = addTable;
-
-},{}],4:[function(require,module,exports){
-module.exports={
-    "assessmentItems": {
-        "assessmentItem": [{
-            "-complexity": "2",
-            "-subject": "Web",
-            "itemBody": {
-                "p": "Tag HTML para a\u00f1adir un formulario"
-            },
-            "correctResponse": {
-                "value": "FORM"
-            }
-        }, {
-            "-complexity": "4",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "Este protocolo acabar\u00e1 funcionando incluso entre dos latas unidas por un cord\u00f3n"
-            },
-            "correctResponse": {
-                "value": "TCP\/IP"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "Preg1"
-            },
-            "correctResponse": {
-                "value": "Res1"
-            }
-        }, {
-            "-complexity": "2",
-            "-subject": "Web",
-            "itemBody": {
-                "p": "Preg2"
-            },
-            "correctResponse": {
-                "value": "Res2"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "Voy a validar con JS"
-            },
-            "correctResponse": {
-                "value": "Y te cuelo un 0"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "Los 0 no pasan "
-            },
-            "correctResponse": {
-                "value": "Solo 1"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "Me apetece joder la tabla "
-            },
-            "correctResponse": {
-                "value": "Voy a descuadrarla a ver que pasa, si pongo una respuesta larga se va a tomar por culo? Puto css"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "jgc"
-            },
-            "correctResponse": {
-                "value": "jgc"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "cjkjn"
-            },
-            "correctResponse": {
-                "value": "124"
-            }
-        }, {
-            "-complexity": "3",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "dfhjk"
-            },
-            "correctResponse": {
-                "value": "va con php..."
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "jgc"
-            },
-            "correctResponse": {
-                "value": "jgc"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "cjkjn"
-            },
-            "correctResponse": {
-                "value": "124"
-            }
-        }, {
-            "-complexity": "3",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "dfhjk"
-            },
-            "correctResponse": {
-                "value": "va con php..."
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "sadad"
-            },
-            "correctResponse": {
-                "value": "asdas"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "122131"
-            },
-            "correctResponse": {
-                "value": "SASDASD"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "as"
-            },
-            "correctResponse": {
-                "value": "aSas&lt;h1&gt;"
-            }
-        }, {
-            "-complexity": "1",
-            "-subject": "Internet",
-            "itemBody": {
-                "p": "&lt;h1&gt; Te la cuelo? &lt;\/h1&gt;"
-            },
-            "correctResponse": {
-                "value": "NO!"
-            }
-        }]
-    }
-}
 
 },{}]},{},[2]);

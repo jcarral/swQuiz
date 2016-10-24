@@ -28,4 +28,12 @@
     file_put_contents($filePath, json_encode($jsonObject));
   }
 
+  function addContentToQuestions($data){
+    $filePath = __DIR__ . "/../static/data/questions.json";
+    $jsonObject = json_decode(file_get_contents($filePath));
+    //TODO: Arreglar esta mierda
+    $jsonObject->assessmentItems->assessmentItem = array_merge($jsonObject->assessmentItems->assessmentItem, $data->assessmentItems->assessmentItem);
+    file_put_contents($filePath, json_encode($jsonObject));
+
+  }
  ?>

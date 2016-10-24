@@ -7,7 +7,7 @@ $filePath = __DIR__ . "/../static/data/questions.json";
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if(isset($_POST['vJS'])){
     if(validateSchema(json_decode($_POST['vJS']))){
-      file_put_contents($filePath, $_POST['vJS']);
+      addContentToQuestions(json_decode($_POST['vJS']));
       $message = 'Pregunta/s añadida/s correctamente';
       $class = 'success';
     }else{
