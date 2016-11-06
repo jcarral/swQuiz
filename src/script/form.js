@@ -1,9 +1,8 @@
 let preguntas
 let quizJSON = {
-  "assessmentItems": {
-    "assessmentItem": [
-    ]
-  }
+    "assessmentItems": {
+        "assessmentItem": []
+    }
 }
 
 //UI elements
@@ -30,39 +29,39 @@ const validarForm = () => {
 }
 
 const generarJSON = () => {
-  preguntas = document.getElementsByClassName('quiz-question')
-  let question
+    preguntas = document.getElementsByClassName('quiz-question')
+    let question
 
-  for (let pregunta of preguntas) {
-      question = {}
-      if (!validarPregunta(pregunta)) return false
-      let select = pregunta.querySelector('select')
-      question["-complexity"] = pregunta.querySelector('input[type=number]').value.toString()
-      question["-subject"] = select.options[select.selectedIndex].value
-      question.itemBody = {
-          "p": pregunta.querySelector('.question').value
-      }
-      question.correctResponse = {
-          "value": pregunta.querySelector('.answer').value
-      }
-      quizJSON.assessmentItems.assessmentItem.push(question)
-  }
+    for (let pregunta of preguntas) {
+        question = {}
+        if (!validarPregunta(pregunta)) return false
+        let select = pregunta.querySelector('select')
+        question["-complexity"] = pregunta.querySelector('input[type=number]').value.toString()
+        question["-subject"] = select.options[select.selectedIndex].value
+        question.itemBody = {
+            "p": pregunta.querySelector('.question').value
+        }
+        question.correctResponse = {
+            "value": pregunta.querySelector('.answer').value
+        }
+        quizJSON.assessmentItems.assessmentItem.push(question)
+    }
 
-  return true
+    return true
 }
 
 
 const submitFormPHP = function(e) {
     e.preventDefault()
     if (!validarForm()) window.alert("Formulario con campos vacios")
-    else{
-      //TODO: Gestionar el envio de datos v.PHP
-      form.submit()
+    else {
+        //TODO: Gestionar el envio de datos v.PHP
+        form.submit()
     }
 }
 
 const postData = (path) => {
-    let  newForm = document.createElement("form")
+    let newForm = document.createElement("form")
     newForm.setAttribute("method", 'POST')
     newForm.setAttribute("action", path)
     let hiddenField = document.createElement("input")
@@ -75,12 +74,11 @@ const postData = (path) => {
 }
 const submitFormJS = function(e) {
 
-  e.preventDefault()
-  if(validarForm()){
-    generarJSON()
-    postData('/quiz')
-  }
-  else window.alert("Formulario con campos vacios")
+    e.preventDefault()
+    if (validarForm()) {
+        generarJSON()
+        postData('/quiz')
+    } else window.alert("Formulario con campos vacios")
 }
 
 
@@ -92,7 +90,7 @@ const insertQuestion = () => {
       </div>
   `
 
-  let answerContent = `<label for="respuestas[]" class="fa fa-check correct"></label>
+    let answerContent = `<label for="respuestas[]" class="fa fa-check correct"></label>
     <input type="text" name="respuesta[]" class="answer" value="" required>
     <label for="dificultad[]" class="fa fa-tachometer"></label>
     <input type="number" min="1" max="5" name="dificultad[]" value="1" class="quiz-difficulty">
@@ -105,7 +103,7 @@ const insertQuestion = () => {
       <option value="Subject5">Subject5</option>
       <option value="Subject6">Subject6</option>
     </select>`
-    if(!validarForm()) return window.alert('No puedes añadir más preguntas si aún hay sin rellenar')
+    if (!validarForm()) return window.alert('No puedes añadir más preguntas si aún hay sin rellenar')
     let deleteBtn = document.createElement('div')
     let nodeQuestion = document.createElement('div')
     let questionAnswerBox = document.createElement('div')
@@ -121,15 +119,15 @@ const insertQuestion = () => {
     form.insertBefore(nodeQuestion, btnAddQuestion)
 }
 
-const removeQuestion = function(e){
-  e.target.parentElement.parentElement.remove();
+const removeQuestion = function(e) {
+    e.target.parentElement.parentElement.remove();
 }
 Element.prototype.remove = function() {
     this.parentElement.removeChild(this);
 }
 
 export const setForm = () => {
-    if(form === null || form === undefined) return false //Que siga ejecutando el main, no estas en la página
+    if (form === null || form === undefined) return false //Que siga ejecutando el main, no estas en la página
     form.addEventListener('submit', submitFormPHP)
     btnAddQuestion.addEventListener('click', insertQuestion)
     btnSendJS.addEventListener('click', submitFormJS)

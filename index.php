@@ -13,6 +13,11 @@
     require_once __DIR__ . '/views/template.php';
   });
 
+  $klein->respond('GET', '/check', function () {
+    $viewRoute = '/student_check.php';
+    require_once __DIR__ . '/views/template.php';
+  });
+
   $klein->respond(array('GET', 'POST'), '/api/questions', function () {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       echo file_get_contents(__DIR__ . "/static/data/questions.json");

@@ -8,6 +8,12 @@
   <p  class="">Ver JSON</p>
 </a>
 
+<a href="/check" class="btn-addQuestion btn-check">
+  <i class="fa fa-check"></i>
+  <p>
+    Validar correo
+  </p>
+</a>
 
 <div class="table" id="table-quiz">
   <div class="row header">

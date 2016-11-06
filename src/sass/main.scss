@@ -26,7 +26,9 @@ body {
     }
 }
 
-
+.hidden{
+  display: none;
+}
 
 a {
     text-decoration: none;
@@ -36,3 +38,4 @@ a {
 @import './partials/__quizForm.scss';
 @import './partials/__footer.scss';
 @import './partials/__table.scss';
+@import './partials/__check.scss';

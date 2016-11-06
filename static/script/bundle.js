@@ -1,4 +1,83 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//UI elements
+var checkForm = document.getElementById('checkForm');
+var inputCheckForm = document.getElementById('checkMail');
+var deleteForm = document.getElementById('deleteStudent');
+var inputDelete = document.getElementById('inputDelete');
+
+var ajax = function ajax(config) {
+    return new Promise(function (resolve, reject) {
+        var http = new XMLHttpRequest();
+        http.open(config.method, config.url, true);
+        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        http.onreadystatechange = function () {
+            if (http.readyState == 4 && http.status == 200) {
+                resolve(http.responseText);
+            } else if (http.status == 400) {
+                reject(http.responseText);
+            }
+        };
+        http.send(config.body);
+    });
+};
+
+var createSpinner = function createSpinner() {
+    var div = document.createElement('div');
+    div.classList = 'bowlG';
+    div.innerHTML = '\n                  \t<div id="bowl_ringG">\n                  \t\t<div class="ball_holderG">\n                  \t\t\t<div class="ballG">\n                  \t\t\t</div>\n                  \t\t</div>\n                  \t</div>';
+    return div;
+};
+
+var createTooltip = function createTooltip(message, typeClass) {
+    var div = document.createElement('div');
+    div.classList = 'tooltip ' + typeClass;
+    div.innerHTML = '\n    ' + message + ' \n  ';
+    return div;
+};
+var submitCheckForm = function submitCheckForm(e) {
+    e.preventDefault();
+    var config = {
+        url: 'https://swrest.herokuapp.com/api/check',
+        method: 'POST',
+        body: 'correo=' + inputCheckForm.value
+    };
+    var loading = createSpinner();
+    checkForm.appendChild(loading);
+    ajax(config).then(function (res) {
+        res = JSON.parse(res);
+        if (res.message === 'Correo válido') {
+            loading.classList += ' hidden';
+            checkForm.appendChild(createTooltip(res.message, 'valid'));
+        }
+    }).catch(function (res) {
+        console.log(res);
+    });
+};
+
+var submitDeleteForm = function submitDeleteForm(e) {
+    e.preventDefault();
+    var config = {
+        url: 'https://swrest.herokuapp.com/api/delete',
+        method: 'DELETE',
+        body: 'correo=' + inputDelete.value
+    };
+    ajax(config).then(function (res) {});
+};
+
+var checkEmail = function checkEmail() {
+    if (checkForm === null || checkForm === 'undefined') return false;
+    checkForm.addEventListener('submit', submitCheckForm);
+    deleteForm.addEventListener('submit', submitDeleteForm);
+};
+
+var setCheck = exports.setCheck = checkEmail;
+
+},{}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -183,22 +262,28 @@ var setForm = exports.setForm = function setForm() {
     btnSendJS.addEventListener('click', submitFormJS);
 };
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 'use strict';
 
 var _form = require('./form.js');
 
 var _table = require('./table.js');
 
+var _check = require('./check.js');
+
 (0, _table.setTable)();
 (0, _form.setForm)();
+(0, _check.setCheck)();
 
-},{"./form.js":1,"./table.js":3}],3:[function(require,module,exports){
+},{"./check.js":1,"./form.js":2,"./table.js":4}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 //UI elements
 var table = document.getElementById('table-quiz');
 
@@ -259,7 +344,7 @@ var fillTable = function fillTable(data) {
 };
 
 var addTable = function addTable() {
-    if (table === null || table === undefined) return false; //Para que se siga ejecutando si no es la pagina
+    if (table === null || (typeof table === 'undefined' ? 'undefined' : _typeof(table)) === (typeof undefined === 'undefined' ? 'undefined' : _typeof(undefined))) return false; //Para que se siga ejecutando si no es la pagina
     getJSONPost().then(function (data) {
         fillTable(data);
     });
@@ -267,4 +352,4 @@ var addTable = function addTable() {
 
 var setTable = exports.setTable = addTable;
 
-},{}]},{},[2]);
+},{}]},{},[3]);

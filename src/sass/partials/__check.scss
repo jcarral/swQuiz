@@ -1,0 +1,30 @@
+.validator-form{
+  display: flex;
+}
+
+.tooltip{
+  position: relative;
+  box-sizing: border-box;
+  padding: 10px;
+  display: inline-block;
+  margin-left: 30px;
+  border-radius: 0 5px 5px 0;
+  &:before{
+    content: '';
+    position: absolute;
+    left: -20px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+  }
+
+  &.valid{
+    background-color: rgb(228, 255, 238);
+    border: 1px solid rgb(157, 255, 193);
+    &:before{
+      border-right: 20px solid rgb(157, 255, 193);
+    }
+  }
+}
