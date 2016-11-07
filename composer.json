@@ -1,6 +1,7 @@
 {
     "require": {
         "klein/klein": "^2.1",
-        "stefk/jval": "dev-master"
+        "stefk/jval": "dev-master",
+        "nategood/httpful": "^0.2.20"
     }
 }

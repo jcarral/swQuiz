@@ -25,7 +25,7 @@ const addTooltip = (res, elements, messages) => {
         elements.tooltip.classList = 'tooltip valid'
         elements.tooltip.innerHTML = messages.valid
     } else {
-        elements.ooltip.classList = 'tooltip error'
+        elements.tooltip.classList = 'tooltip error'
         elements.tooltip.innerHTML = messages.error
     }
     elements.loading.classList += ' hidden'
@@ -43,6 +43,7 @@ const submitCheckForm = (e) => {
 
     tooltip.classList += 'hidden'
     loading.classList = 'bowlG'
+
     ajax(config)
         .then((res) => {
             res = JSON.parse(res)

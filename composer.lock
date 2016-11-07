@@ -1,0 +1,179 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "09e33b4d8087427d0179df587168b6c2",
+    "content-hash": "7a0cd5e27a8da25411293b572e2c73cb",
+    "packages": [
+        {
+            "name": "klein/klein",
+            "version": "v2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/klein/klein.php.git",
+                "reference": "5dc073f05adb67ee09680545b4cc7b0590d2559e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/klein/klein.php/zipball/5dc073f05adb67ee09680545b4cc7b0590d2559e",
+                "reference": "5dc073f05adb67ee09680545b4cc7b0590d2559e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/php-code-coverage": "1.2.x",
+                "phpunit/phpunit": "3.7.x",
+                "squizlabs/php_codesniffer": "1.4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Klein\\": "src/Klein/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris O'Hara",
+                    "email": "cohara87@gmail.com",
+                    "homepage": "http://chris6f.com/",
+                    "role": "Creator/Developer"
+                },
+                {
+                    "name": "Trevor Suarez",
+                    "email": "rican7@gmail.com",
+                    "homepage": "http://about.me/tnsuarez",
+                    "role": "Contributor/Developer"
+                }
+            ],
+            "description": "A lightning fast router for PHP",
+            "homepage": "https://github.com/chriso/klein.php",
+            "keywords": [
+                "boilerplate",
+                "router",
+                "routing",
+                "sinatra"
+            ],
+            "time": "2014-11-07 07:35:23"
+        },
+        {
+            "name": "nategood/httpful",
+            "version": "0.2.20",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nategood/httpful.git",
+                "reference": "c1cd4d46a4b281229032cf39d4dd852f9887c0f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nategood/httpful/zipball/c1cd4d46a4b281229032cf39d4dd852f9887c0f6",
+                "reference": "c1cd4d46a4b281229032cf39d4dd852f9887c0f6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Httpful": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nate Good",
+                    "email": "me@nategood.com",
+                    "homepage": "http://nategood.com"
+                }
+            ],
+            "description": "A Readable, Chainable, REST friendly, PHP HTTP Client",
+            "homepage": "http://github.com/nategood/httpful",
+            "keywords": [
+                "api",
+                "curl",
+                "http",
+                "requests",
+                "rest",
+                "restful"
+            ],
+            "time": "2015-10-26 16:11:30"
+        },
+        {
+            "name": "stefk/jval",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stefk/JVal.git",
+                "reference": "1c26dd2c16e5273d1c0565ff6c9dc51e6316c564"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stefk/JVal/zipball/1c26dd2c16e5273d1c0565ff6c9dc51e6316c564",
+                "reference": "1c26dd2c16e5273d1c0565ff6c9dc51e6316c564",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.4.1"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "~1.10",
+                "json-schema/json-schema": "dev-master",
+                "json-schema/test-suite": "dev-master",
+                "phpunit/phpunit": "~4.8"
+            },
+            "bin": [
+                "bin/jval"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JVal\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stéphane Klein",
+                    "email": "stephaneklein221@gmail.com"
+                }
+            ],
+            "description": "JSON Schema validator",
+            "homepage": "https://github.com/stefk/JVal",
+            "keywords": [
+                "JSON Schema",
+                "json",
+                "validation"
+            ],
+            "time": "2016-09-25 10:45:09"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "stefk/jval": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

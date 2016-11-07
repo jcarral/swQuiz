@@ -9,22 +9,34 @@
   display: inline-block;
   margin-left: 30px;
   border-radius: 0 5px 5px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   &:before{
     content: '';
     position: absolute;
-    left: -20px;
-    bottom: 0;
+    left: -10px;
+    bottom: 10px;
     width: 0;
     height: 0;
-    border-top: 20px solid transparent;
-    border-bottom: 20px solid transparent;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
   }
 
   &.valid{
-    background-color: rgb(228, 255, 238);
-    border: 1px solid rgb(157, 255, 193);
+    background-color: $tooltipValidBack;
+    border: 1px solid $tooltipValidBorder;
     &:before{
-      border-right: 20px solid rgb(157, 255, 193);
+      border-right: 10px solid $tooltipValidBorder;
     }
   }
+  &.error{
+    background-color: $tooltipErrorBack;
+    border: 1px solid $tooltipErrorBorder;
+    &:before{
+      border-right: 10px solid $tooltipErrorBorder;
+    }
+  }
+}
+
+.btn-cloud>i{
+  color: white;
 }

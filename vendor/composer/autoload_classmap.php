@@ -6,6 +6,21 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Httpful\\Bootstrap' => $vendorDir . '/nategood/httpful/src/Httpful/Bootstrap.php',
+    'Httpful\\Exception\\ConnectionErrorException' => $vendorDir . '/nategood/httpful/src/Httpful/Exception/ConnectionErrorException.php',
+    'Httpful\\Handlers\\CsvHandler' => $vendorDir . '/nategood/httpful/src/Httpful/Handlers/CsvHandler.php',
+    'Httpful\\Handlers\\FormHandler' => $vendorDir . '/nategood/httpful/src/Httpful/Handlers/FormHandler.php',
+    'Httpful\\Handlers\\JsonHandler' => $vendorDir . '/nategood/httpful/src/Httpful/Handlers/JsonHandler.php',
+    'Httpful\\Handlers\\MimeHandlerAdapter' => $vendorDir . '/nategood/httpful/src/Httpful/Handlers/MimeHandlerAdapter.php',
+    'Httpful\\Handlers\\XHtmlHandler' => $vendorDir . '/nategood/httpful/src/Httpful/Handlers/XHtmlHandler.php',
+    'Httpful\\Handlers\\XmlHandler' => $vendorDir . '/nategood/httpful/src/Httpful/Handlers/XmlHandler.php',
+    'Httpful\\Http' => $vendorDir . '/nategood/httpful/src/Httpful/Http.php',
+    'Httpful\\Httpful' => $vendorDir . '/nategood/httpful/src/Httpful/Httpful.php',
+    'Httpful\\Mime' => $vendorDir . '/nategood/httpful/src/Httpful/Mime.php',
+    'Httpful\\Proxy' => $vendorDir . '/nategood/httpful/src/Httpful/Proxy.php',
+    'Httpful\\Request' => $vendorDir . '/nategood/httpful/src/Httpful/Request.php',
+    'Httpful\\Response' => $vendorDir . '/nategood/httpful/src/Httpful/Response.php',
+    'Httpful\\Response\\Headers' => $vendorDir . '/nategood/httpful/src/Httpful/Response/Headers.php',
     'Klein\\AbstractResponse' => $vendorDir . '/klein/klein/src/Klein/AbstractResponse.php',
     'Klein\\AbstractRouteFactory' => $vendorDir . '/klein/klein/src/Klein/AbstractRouteFactory.php',
     'Klein\\App' => $vendorDir . '/klein/klein/src/Klein/App.php',

@@ -28,7 +28,32 @@ class ComposerStaticInit8df626067e5ce489e2ac9fe3b60fd16b
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'H' => 
+        array (
+            'Httpful' => 
+            array (
+                0 => __DIR__ . '/..' . '/nategood/httpful/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
+        'Httpful\\Bootstrap' => __DIR__ . '/..' . '/nategood/httpful/src/Httpful/Bootstrap.php',
+        'Httpful\\Exception\\ConnectionErrorException' => __DIR__ . '/..' . '/nategood/httpful/src/Httpful/Exception/ConnectionErrorException.php',
+        'Httpful\\Handlers\\CsvHandler' => __DIR__ . '/..' . '/nategood/httpful/src/Httpful/Handlers/CsvHandler.php',
+        'Httpful\\Handlers\\FormHandler' => __DIR__ . '/..' . '/nategood/httpful/src/Httpful/Handlers/FormHandler.php',
+        'Httpful\\Handlers\\JsonHandler' => __DIR__ . '/..' . '/nategood/httpful/src/Httpful/Handlers/JsonHandler.php',
+        'Httpful\\Handlers\\MimeHandlerAdapter' => __DIR__ . '/..' . '/nategood/httpful/src/Httpful/Handlers/MimeHandlerAdapter.php',
+        'Httpful\\Handlers\\XHtmlHandler' => __DIR__ . '/..' . '/nategood/httpful/src/Httpful/Handlers/XHtmlHandler.php',
+        'Httpful\\Handlers\\XmlHandler' => __DIR__ . '/..' . '/nategood/httpful/src/Httpful/Handlers/XmlHandler.php',
+        'Httpful\\Http' => __DIR__ . '/..' . '/nategood/httpful/src/Httpful/Http.php',
+        'Httpful\\Httpful' => __DIR__ . '/..' . '/nategood/httpful/src/Httpful/Httpful.php',
+        'Httpful\\Mime' => __DIR__ . '/..' . '/nategood/httpful/src/Httpful/Mime.php',
+        'Httpful\\Proxy' => __DIR__ . '/..' . '/nategood/httpful/src/Httpful/Proxy.php',
+        'Httpful\\Request' => __DIR__ . '/..' . '/nategood/httpful/src/Httpful/Request.php',
+        'Httpful\\Response' => __DIR__ . '/..' . '/nategood/httpful/src/Httpful/Response.php',
+        'Httpful\\Response\\Headers' => __DIR__ . '/..' . '/nategood/httpful/src/Httpful/Response/Headers.php',
         'Klein\\AbstractResponse' => __DIR__ . '/..' . '/klein/klein/src/Klein/AbstractResponse.php',
         'Klein\\AbstractRouteFactory' => __DIR__ . '/..' . '/klein/klein/src/Klein/AbstractRouteFactory.php',
         'Klein\\App' => __DIR__ . '/..' . '/klein/klein/src/Klein/App.php',
@@ -65,6 +90,7 @@ class ComposerStaticInit8df626067e5ce489e2ac9fe3b60fd16b
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit8df626067e5ce489e2ac9fe3b60fd16b::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit8df626067e5ce489e2ac9fe3b60fd16b::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit8df626067e5ce489e2ac9fe3b60fd16b::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit8df626067e5ce489e2ac9fe3b60fd16b::$classMap;
 
         }, null, ClassLoader::class);

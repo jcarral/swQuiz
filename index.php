@@ -13,7 +13,7 @@
     require_once __DIR__ . '/views/template.php';
   });
 
-  $klein->respond('GET', '/check', function () {
+  $klein->respond(array('GET', 'POST'), '/check', function () {
     $viewRoute = '/student_check.php';
     require_once __DIR__ . '/views/template.php';
   });

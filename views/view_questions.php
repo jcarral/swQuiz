@@ -8,10 +8,10 @@
   <p  class="">Ver JSON</p>
 </a>
 
-<a href="/check" class="btn-addQuestion btn-check">
-  <i class="fa fa-check"></i>
+<a href="/check" class="btn-addQuestion btn-cloud">
+  <i class="fa fa-cloud"></i>
   <p>
-    Validar correo
+    REST
   </p>
 </a>
 

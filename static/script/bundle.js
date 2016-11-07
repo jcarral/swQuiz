@@ -31,7 +31,7 @@ var addTooltip = function addTooltip(res, elements, messages) {
         elements.tooltip.classList = 'tooltip valid';
         elements.tooltip.innerHTML = messages.valid;
     } else {
-        elements.ooltip.classList = 'tooltip error';
+        elements.tooltip.classList = 'tooltip error';
         elements.tooltip.innerHTML = messages.error;
     }
     elements.loading.classList += ' hidden';
@@ -49,6 +49,7 @@ var submitCheckForm = function submitCheckForm(e) {
 
     tooltip.classList += 'hidden';
     loading.classList = 'bowlG';
+
     ajax(config).then(function (res) {
         res = JSON.parse(res);
         var elements = {
