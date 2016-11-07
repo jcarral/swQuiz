@@ -26,19 +26,17 @@ var ajax = function ajax(config) {
     });
 };
 
-var createSpinner = function createSpinner() {
-    var div = document.createElement('div');
-    div.classList = 'bowlG';
-    div.innerHTML = '\n                  \t<div id="bowl_ringG">\n                  \t\t<div class="ball_holderG">\n                  \t\t\t<div class="ballG">\n                  \t\t\t</div>\n                  \t\t</div>\n                  \t</div>';
-    return div;
+var addTooltip = function addTooltip(res, elements, messages) {
+    if (res.message === messages.validMessage) {
+        elements.tooltip.classList = 'tooltip valid';
+        elements.tooltip.innerHTML = messages.valid;
+    } else {
+        elements.ooltip.classList = 'tooltip error';
+        elements.tooltip.innerHTML = messages.error;
+    }
+    elements.loading.classList += ' hidden';
 };
 
-var createTooltip = function createTooltip(message, typeClass) {
-    var div = document.createElement('div');
-    div.classList = 'tooltip ' + typeClass;
-    div.innerHTML = '\n    ' + message + ' \n  ';
-    return div;
-};
 var submitCheckForm = function submitCheckForm(e) {
     e.preventDefault();
     var config = {
@@ -46,14 +44,23 @@ var submitCheckForm = function submitCheckForm(e) {
         method: 'POST',
         body: 'correo=' + inputCheckForm.value
     };
-    var loading = createSpinner();
-    checkForm.appendChild(loading);
+    var loading = document.getElementById('spinnerCheck');
+    var tooltip = document.getElementById('tooltipCheck');
+
+    tooltip.classList += 'hidden';
+    loading.classList = 'bowlG';
     ajax(config).then(function (res) {
         res = JSON.parse(res);
-        if (res.message === 'Correo válido') {
-            loading.classList += ' hidden';
-            checkForm.appendChild(createTooltip(res.message, 'valid'));
-        }
+        var elements = {
+            tooltip: tooltip,
+            loading: loading
+        };
+        var messages = {
+            validMessage: 'Correo válido',
+            valid: 'Correo correcto',
+            error: 'Correo incorrecto'
+        };
+        addTooltip(res, elements, messages);
     }).catch(function (res) {
         console.log(res);
     });
@@ -62,11 +69,32 @@ var submitCheckForm = function submitCheckForm(e) {
 var submitDeleteForm = function submitDeleteForm(e) {
     e.preventDefault();
     var config = {
-        url: 'https://swrest.herokuapp.com/api/delete',
+        url: 'https://swrest.herokuapp.com/api/check',
         method: 'DELETE',
         body: 'correo=' + inputDelete.value
     };
-    ajax(config).then(function (res) {});
+    var loading = document.getElementById('spinnerDelete');
+    var tooltip = document.getElementById('tooltipDelete');
+
+    tooltip.classList += 'hidden';
+    loading.classList = 'bowlG';
+    ajax(config).then(function (res) {
+        res = JSON.parse(res);
+        var elements = {
+            tooltip: tooltip,
+            loading: loading
+        };
+        var messages = {
+            validMessage: 'Estudiante eliminado correctamente',
+            valid: 'Estudiante borrado correctamente',
+            error: 'No se ha podido borrar al estudiante'
+        };
+        addTooltip(res, elements, messages);
+    }).catch(function (err) {
+        tooltip.classList = 'tooltip error';
+        tooltip.innerHTML = 'No se ha podido borrar al estudiante, error';
+        loading.classList += ' hidden';
+    });
 };
 
 var checkEmail = function checkEmail() {

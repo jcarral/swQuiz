@@ -20,27 +20,17 @@ const ajax = (config) => {
     })
 }
 
-const createSpinner = () => {
-  let div = document.createElement('div')
-  div.classList = 'bowlG'
-  div.innerHTML = `
-                  	<div id="bowl_ringG">
-                  		<div class="ball_holderG">
-                  			<div class="ballG">
-                  			</div>
-                  		</div>
-                  	</div>`
-  return div
+const addTooltip = (res, elements, messages) => {
+    if (res.message === messages.validMessage) {
+        elements.tooltip.classList = 'tooltip valid'
+        elements.tooltip.innerHTML = messages.valid
+    } else {
+        elements.ooltip.classList = 'tooltip error'
+        elements.tooltip.innerHTML = messages.error
+    }
+    elements.loading.classList += ' hidden'
 }
 
-const createTooltip = (message, typeClass) => {
-  let div = document.createElement('div')
-  div.classList = `tooltip ${typeClass}`
-  div.innerHTML = `
-    ${message} 
-  `
-  return div
-}
 const submitCheckForm = (e) => {
     e.preventDefault()
     let config = {
@@ -48,15 +38,24 @@ const submitCheckForm = (e) => {
         method: 'POST',
         body: `correo=${inputCheckForm.value}`
     }
-    let loading = createSpinner()
-    checkForm.appendChild(loading)
+    let loading = document.getElementById('spinnerCheck')
+    let tooltip = document.getElementById('tooltipCheck')
+
+    tooltip.classList += 'hidden'
+    loading.classList = 'bowlG'
     ajax(config)
         .then((res) => {
             res = JSON.parse(res)
-            if (res.message === 'Correo válido') {
-              loading.classList += ' hidden'
-              checkForm.appendChild(createTooltip(res.message, 'valid'))
+            let elements = {
+                tooltip: tooltip,
+                loading: loading
             }
+            let messages = {
+                validMessage: 'Correo válido',
+                valid: 'Correo correcto',
+                error: 'Correo incorrecto'
+            }
+            addTooltip(res, elements, messages)
         })
         .catch((res) => {
             console.log(res);
@@ -66,13 +65,32 @@ const submitCheckForm = (e) => {
 const submitDeleteForm = (e) => {
     e.preventDefault()
     let config = {
-        url: `https://swrest.herokuapp.com/api/delete`,
+        url: `https://swrest.herokuapp.com/api/check`,
         method: 'DELETE',
         body: `correo=${inputDelete.value}`
     }
+    let loading = document.getElementById('spinnerDelete')
+    let tooltip = document.getElementById('tooltipDelete')
+
+    tooltip.classList += 'hidden'
+    loading.classList = 'bowlG'
     ajax(config)
         .then((res) => {
-
+            res = JSON.parse(res)
+            let elements = {
+                tooltip: tooltip,
+                loading: loading
+            }
+            let messages = {
+                validMessage: 'Estudiante eliminado correctamente',
+                valid: 'Estudiante borrado correctamente',
+                error: 'No se ha podido borrar al estudiante'
+            }
+            addTooltip(res, elements, messages)
+        }).catch((err) => {
+            tooltip.classList = 'tooltip error'
+            tooltip.innerHTML = 'No se ha podido borrar al estudiante, error'
+            loading.classList += ' hidden'
         })
 }
 
