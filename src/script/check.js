@@ -20,12 +20,20 @@ const ajax = (config) => {
     })
 }
 
+const hideTooltips = () => {
+  let tooltips = document.getElementsByClassName('tooltip')
+  Array.prototype.forEach.call(tooltips, (item)=>{
+    item.classList = 'hidden'
+  })
+}
+
 const addTooltip = (res, elements, messages) => {
+  hideTooltips()
     if (res.message === messages.validMessage) {
-        elements.tooltip.classList = 'tooltip valid'
+        elements.tooltip.classList = 'tooltip valid left'
         elements.tooltip.innerHTML = messages.valid
     } else {
-        elements.tooltip.classList = 'tooltip error'
+        elements.tooltip.classList = 'tooltip error left'
         elements.tooltip.innerHTML = messages.error
     }
     elements.loading.classList += ' hidden'
@@ -66,7 +74,7 @@ const submitCheckForm = (e) => {
 const submitDeleteForm = (e) => {
     e.preventDefault()
     let config = {
-        url: `https://swrest.herokuapp.com/api/check`,
+        url: `https://swrest.herokuapp.com/api/delete`,
         method: 'DELETE',
         body: `correo=${inputDelete.value}`
     }
@@ -88,6 +96,7 @@ const submitDeleteForm = (e) => {
                 error: 'No se ha podido borrar al estudiante'
             }
             addTooltip(res, elements, messages)
+
         }).catch((err) => {
             tooltip.classList = 'tooltip error'
             tooltip.innerHTML = 'No se ha podido borrar al estudiante, error'

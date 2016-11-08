@@ -10,7 +10,7 @@
   margin-left: 30px;
   border-radius: 0 5px 5px 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  &:before{
+  &.left:before{
     content: '';
     position: absolute;
     left: -10px;
@@ -21,11 +21,25 @@
     border-bottom: 10px solid transparent;
   }
 
+  &.top:before{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -10px;
+    left: 10px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+
   &.valid{
     background-color: $tooltipValidBack;
     border: 1px solid $tooltipValidBorder;
-    &:before{
+    &.left:before{
       border-right: 10px solid $tooltipValidBorder;
+    }
+    &.top:before{
+     border-bottom: 10px solid $tooltipValidBorder;
     }
   }
   &.error{
@@ -34,9 +48,45 @@
     &:before{
       border-right: 10px solid $tooltipErrorBorder;
     }
+    &.top:before{
+     border-bottom: 10px solid $tooltipErrorBorder;
+    }
   }
 }
 
 .btn-cloud>i{
   color: white;
+}
+
+input.rest-input{
+  padding: 10px;
+  border: solid 1px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
+  width: 30%;
+  font-size: 1em;
+}
+
+input.rest-submit{
+  background-color: $mainColor;
+  color: white;
+  border:none;
+  padding: 10px;
+  font-size: 1em;
+  transition: all 0.25s ease;
+  &:hover{
+    background-color: $mainDarkColor;
+  }
+}
+
+.rest-title{
+  @extend .quiz-title;
+  text-align: left;
+  padding-left: 0;
+  margin-bottom: 5px;
+}
+
+.top{
+  margin-top: 1em;
+  border-radius: 0 5px 5px 5px;
+
 }

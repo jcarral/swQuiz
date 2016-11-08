@@ -19,10 +19,10 @@
     }
   }
  ?>
-<h3>Comprobar matrícula (JS)</h3>
+<h3 class="rest-title container-title quiz-title">Comprobar matrícula (JS)</h3>
 <form class="" action="" method="" id="checkForm" class="validator-form">
-  <input type="email" name="correo" value="" id="checkMail">
-  <input type="submit" name="name" value="Comprobar">
+  <input type="email" name="correo" value="" id="checkMail" class="rest-input" placeholder="Introducir correo electronico">
+  <input type="submit" name="name" value="Comprobar" class="rest-submit">
   <div class="tooltip hidden" id="tooltipCheck"></div>
   <div class="bowlG hidden" id='spinnerCheck'>
     <div id="bowl_ringG">
@@ -34,13 +34,13 @@
   </div>
 </form>
 
-<h3>Añadir estudiante (PHP)</h3>
+<h3 class="rest-title container-title quiz-title">Añadir estudiante (PHP)</h3>
 <form action="" id="addStudent" method="POST">
-  <input type="email" name="correo" value="" required>
-  <input type="text" name="nombre" value="">
-  <input type="submit" value="Añadir estudiante nuevo">
+  <input type="email" name="correo" class="rest-input" value="" placeholder="Introducir correo electronico"required>
+  <input type="text" name="nombre" class="rest-input" value="" placeholder="Introducir nombre del estudiante">
+  <input type="submit" value="Añadir estudiante nuevo" class="rest-submit">
   <?php if(isset($tooltipMessage)){
-    echo "<div class='tooltip $tooltipMessage[0]'> $tooltipMessage[1] </div>";
+    echo "<div class='tooltip top $tooltipMessage[0]'> $tooltipMessage[1] </div>";
   } ?>
   <div class="bowlG hidden">
     <div id="bowl_ringG">
@@ -52,10 +52,10 @@
   </div>
 </form>
 
-<h3>Borrar estudiante (JS)</h3>
+<h3 class="rest-title container-title quiz-title">Borrar estudiante (JS)</h3>
 <form action="" id="deleteStudent">
-  <input type="email" name="name" value="" required id='inputDelete'>
-  <input type="submit" name="name" value="Borrar estudiante">
+  <input type="email" name="name" class="rest-input" value="" required id='inputDelete' placeholder="Introducir correo electronico">
+  <input type="submit" name="name" value="Borrar estudiante" class="rest-submit">
   <div class="tooltip hidden" id="tooltipDelete"></div>
   <div class="bowlG hidden" id="spinnerDelete">
     <div id="bowl_ringG">

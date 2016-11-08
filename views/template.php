@@ -30,7 +30,7 @@
          ?>
     </div>
     <footer class="footer">
-        <a href="http://github.com/jcarral" class="fa fa-github"></a>
+        <a href="http://github.com/jcarral/swQuiz" class="fa fa-github"></a>
     </footer>
 
     <script src="/static/script/bundle.js"></script>

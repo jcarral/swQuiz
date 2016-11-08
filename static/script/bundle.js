@@ -26,12 +26,20 @@ var ajax = function ajax(config) {
     });
 };
 
+var hideTooltips = function hideTooltips() {
+    var tooltips = document.getElementsByClassName('tooltip');
+    Array.prototype.forEach.call(tooltips, function (item) {
+        item.classList = 'hidden';
+    });
+};
+
 var addTooltip = function addTooltip(res, elements, messages) {
+    hideTooltips();
     if (res.message === messages.validMessage) {
-        elements.tooltip.classList = 'tooltip valid';
+        elements.tooltip.classList = 'tooltip valid left';
         elements.tooltip.innerHTML = messages.valid;
     } else {
-        elements.tooltip.classList = 'tooltip error';
+        elements.tooltip.classList = 'tooltip error left';
         elements.tooltip.innerHTML = messages.error;
     }
     elements.loading.classList += ' hidden';
@@ -70,7 +78,7 @@ var submitCheckForm = function submitCheckForm(e) {
 var submitDeleteForm = function submitDeleteForm(e) {
     e.preventDefault();
     var config = {
-        url: 'https://swrest.herokuapp.com/api/check',
+        url: 'https://swrest.herokuapp.com/api/delete',
         method: 'DELETE',
         body: 'correo=' + inputDelete.value
     };
