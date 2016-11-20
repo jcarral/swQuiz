@@ -42,9 +42,8 @@ const addTooltip = (res, elements, messages) => {
 const submitCheckForm = (e) => {
     e.preventDefault()
     let config = {
-        url: `https://swrest.herokuapp.com/api/check`,
-        method: 'POST',
-        body: `correo=${inputCheckForm.value}`
+        url: `https://swrest.herokuapp.com/api/check/${inputCheckForm.value}`,
+        method: 'GET',
     }
     let loading = document.getElementById('spinnerCheck')
     let tooltip = document.getElementById('tooltipCheck')

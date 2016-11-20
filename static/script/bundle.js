@@ -48,9 +48,8 @@ var addTooltip = function addTooltip(res, elements, messages) {
 var submitCheckForm = function submitCheckForm(e) {
     e.preventDefault();
     var config = {
-        url: 'https://swrest.herokuapp.com/api/check',
-        method: 'POST',
-        body: 'correo=' + inputCheckForm.value
+        url: 'https://swrest.herokuapp.com/api/check/' + inputCheckForm.value,
+        method: 'GET'
     };
     var loading = document.getElementById('spinnerCheck');
     var tooltip = document.getElementById('tooltipCheck');
