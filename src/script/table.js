@@ -37,7 +37,7 @@ const fillTable = (data) => {
 }
 
 const addTable = () => {
-    if (table === null || typeof table === typeof undefined) return false //Para que se siga ejecutando si no es la pagina
+    if (table === null || typeof table === 'undefined') return false //Para que se siga ejecutando si no es la pagina
     getJSONPost()
         .then((data) => {
             fillTable(data)
