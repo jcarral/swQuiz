@@ -10,11 +10,10 @@ const btnAddQuestion = document.getElementById('newQuestion')
 const btnSendJS = document.getElementById('btn-submit-js')
 const form = document.getElementById('formQuiz')
 
-
 const validarPregunta = (pregunta) => {
     let inputs = pregunta.getElementsByTagName('input')
     for (let input of inputs) {
-        if (input.value === '') return false
+        if (input.value.trim() === '') return false //Si es vacio o esta lleno de espacios => NO VALIDO
     }
     return true
 }
@@ -35,6 +34,8 @@ const generarJSON = () => {
     for (let pregunta of preguntas) {
         question = {}
         if (!validarPregunta(pregunta)) return false
+        //Si la pregunta es valida la añade al objeto
+        //que luego se envia al servidor
         let select = pregunta.querySelector('select')
         question["-complexity"] = pregunta.querySelector('input[type=number]').value.toString()
         question["-subject"] = select.options[select.selectedIndex].value
@@ -44,22 +45,24 @@ const generarJSON = () => {
         question.correctResponse = {
             "value": pregunta.querySelector('.answer').value
         }
-        quizJSON.assessmentItems.assessmentItem.push(question)
+        quizJSON.assessmentItems.assessmentItem.push(question) //Pregunta añadida al resto de preguntas
     }
 
     return true
 }
 
-
 const submitFormPHP = function(e) {
     e.preventDefault()
     if (!validarForm()) window.alert("Formulario con campos vacios")
     else {
-        //TODO: Gestionar el envio de datos v.PHP
         form.submit()
     }
 }
 
+/*
+* Genera un formulario oculto para poder enviar las preguntas a traves de JS
+* De esta forma permite enviar el mismo formulario usando PHP (forma original) o JS (forma alternativa)
+ */
 const postData = (path) => {
     let newForm = document.createElement("form")
     newForm.setAttribute("method", 'POST')
@@ -72,8 +75,8 @@ const postData = (path) => {
     document.body.appendChild(newForm)
     newForm.submit()
 }
-const submitFormJS = function(e) {
 
+const submitFormJS = function(e) {
     e.preventDefault()
     if (validarForm()) {
         generarJSON()
@@ -83,6 +86,7 @@ const submitFormJS = function(e) {
 
 
 const insertQuestion = () => {
+  //Esto de meter el string así a pelo es una cerdada
     let questionContent = `
       <div class="quiz-question-container">
           <div class="question-pos"></div>
@@ -103,8 +107,9 @@ const insertQuestion = () => {
       <option value="Subject5">Subject5</option>
       <option value="Subject6">Subject6</option>
     </select>`
+
     if (!validarForm()) return window.alert('No puedes añadir más preguntas si aún hay sin rellenar')
-    let deleteBtn = document.createElement('div')
+    let deleteBtn = document.createElement('div') //Añade un btn para poder borrar la pregunta
     let nodeQuestion = document.createElement('div')
     let questionAnswerBox = document.createElement('div')
 
@@ -119,6 +124,7 @@ const insertQuestion = () => {
     form.insertBefore(nodeQuestion, btnAddQuestion)
 }
 
+//Borra la pregunta actual
 const removeQuestion = function(e) {
     e.target.parentElement.parentElement.remove();
 }

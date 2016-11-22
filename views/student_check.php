@@ -5,11 +5,11 @@
       $uri = 'https://swrest.herokuapp.com/api/add';
       $nombreUsuario = (isset($_POST['nombre']))?$_POST['nombre']:'SinNombre';
       $data = '{"estudiante": {"correo": "'.$_POST['correo'].'", "nombre": "'.$nombreUsuario.'" }}';
-      $res = \Httpful\Request::put($uri)
+      $res = \Httpful\Request::put($uri) //Envía la peticion a la uri
         ->sendsJson()
         ->body($data)
         ->send();
-       if(is_object($res) && strcmp($res->body->message, $validMessage) == 0){
+       if(is_object($res) && strcmp($res->body->message, $validMessage) == 0){ //Compara el mensaje de respuesta para verificar que ha ido bien
          $tooltipMessage = array('valid', 'Estudiante añadido correctamente');
        }else{
          $tooltipMessage = array('error', 'Error al intentar añadir un estudiante');

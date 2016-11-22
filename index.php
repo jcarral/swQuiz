@@ -3,6 +3,7 @@
 
   $klein = new \Klein\Klein();
 
+  //GESTION DE LAS RUTAS
   $klein->respond(array('POST', 'GET'), '/', function () {
     $viewRoute = '/view_questions.php';
     require_once __DIR__ . '/views/template.php';

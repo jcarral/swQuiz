@@ -4,6 +4,15 @@ const inputCheckForm = document.getElementById('checkMail')
 const deleteForm = document.getElementById('deleteStudent')
 const inputDelete = document.getElementById('inputDelete')
 
+/**
+ * Funcion para realizar peticiones AJAX
+ * @param  {
+ *            method: String,
+ *            url: String,
+ *            body: String | Object [OPTIONAL]
+ *          }
+ * @return none
+ */
 const ajax = (config) => {
     return new Promise((resolve, reject) => {
         let http = new XMLHttpRequest()
@@ -20,6 +29,9 @@ const ajax = (config) => {
     })
 }
 
+/**
+ * Funcion auxiliar para ocultar los tooltips
+ */
 const hideTooltips = () => {
   let tooltips = document.getElementsByClassName('tooltip')
   Array.prototype.forEach.call(tooltips, (item)=>{
@@ -39,6 +51,9 @@ const addTooltip = (res, elements, messages) => {
     elements.loading.classList += ' hidden'
 }
 
+/**
+ * Función para gestionar la comprobación del correo
+ */
 const submitCheckForm = (e) => {
     e.preventDefault()
     let config = {
@@ -48,11 +63,14 @@ const submitCheckForm = (e) => {
     let loading = document.getElementById('spinnerCheck')
     let tooltip = document.getElementById('tooltipCheck')
 
+    //Se oculta el tooltip y se muestra el spinner
     tooltip.classList += 'hidden'
     loading.classList = 'bowlG'
 
     ajax(config)
         .then((res) => {
+          //Si la respuesta es correcta se muestra el tooltip
+          //dependiendo de si el correo es correcto o no
             res = JSON.parse(res)
             let elements = {
                 tooltip: tooltip,
@@ -70,6 +88,9 @@ const submitCheckForm = (e) => {
         })
 }
 
+/**
+ * Función para gestionar el borrado de usuarios
+ */
 const submitDeleteForm = (e) => {
     e.preventDefault()
     let config = {
@@ -103,6 +124,9 @@ const submitDeleteForm = (e) => {
         })
 }
 
+/**
+ * Función que se exporta y que pone a escuchar a los formularios
+ */
 const checkEmail = () => {
     if (checkForm === null || checkForm === 'undefined') return false
     checkForm.addEventListener('submit', submitCheckForm)

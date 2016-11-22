@@ -1,6 +1,7 @@
 //UI elements
 const table = document.getElementById('table-quiz')
 
+//Devuelve una fila con un elemento de cada pregunta por celda
 const addRow = (data) => {
     let row = ''
     data.forEach((value, i) => {
@@ -9,6 +10,7 @@ const addRow = (data) => {
     return row;
 }
 
+//Función para gestionar el envío de peticiones AJAX
 const getJSONPost = () => {
     return new Promise((resolve, reject) => {
         let http = new XMLHttpRequest();
@@ -24,6 +26,7 @@ const getJSONPost = () => {
     })
 }
 
+//Función para rellenar la tabla con las preguntas
 const fillTable = (data) => {
     data = JSON.parse(data)
     let questions = data.assessmentItems.assessmentItem
@@ -36,6 +39,7 @@ const fillTable = (data) => {
     }
 }
 
+//Función para añadir la tabla
 const addTable = () => {
     if (table === null || typeof table === 'undefined') return false //Para que se siga ejecutando si no es la pagina
     getJSONPost()

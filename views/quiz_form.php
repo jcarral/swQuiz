@@ -5,18 +5,18 @@ require_once __DIR__ . "/../lib/validaciones.php";
 $filePath = __DIR__ . "/../static/data/questions.json";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if(isset($_POST['vJS'])){
-    if(validateSchema(json_decode($_POST['vJS']))){
-      addContentToQuestions(json_decode($_POST['vJS']));
+  if(isset($_POST['vJS'])){ //Peticion usando JS
+    if(validateSchema(json_decode($_POST['vJS']))){ //Valida si el esquema recibido por POST es valido
+      addContentToQuestions(json_decode($_POST['vJS'])); //Añade la/s pregunta/s junto al resto
       $message = 'Pregunta/s añadida/s correctamente';
       $class = 'success';
     }else{
       $message = 'No intentes meter un JSON que no es valido, a mi no me la cuelas. v.JS';
       $class = 'error';
     }
-  }elseif (isset($_POST['pregunta'])) {
-      if(validForm($_POST)){
-        addDataToJSON($_POST, $filePath);
+  }elseif (isset($_POST['pregunta'])) { //Peticion usando PHP
+      if(validForm($_POST)){ //Valida los datos del formulario
+        addDataToJSON($_POST, $filePath); //Añade los datos al JSON que contiene el resto
         $message = 'Pregunta/s añadida/s correctamente';
         $class = 'success';
       }else{
