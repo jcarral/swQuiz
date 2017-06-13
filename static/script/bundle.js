@@ -10,6 +10,15 @@ var inputCheckForm = document.getElementById('checkMail');
 var deleteForm = document.getElementById('deleteStudent');
 var inputDelete = document.getElementById('inputDelete');
 
+/**
+ * Funcion para realizar peticiones AJAX
+ * @param  {
+ *            method: String,
+ *            url: String,
+ *            body: String | Object [OPTIONAL]
+ *          }
+ * @return none
+ */
 var ajax = function ajax(config) {
     return new Promise(function (resolve, reject) {
         var http = new XMLHttpRequest();
@@ -26,6 +35,9 @@ var ajax = function ajax(config) {
     });
 };
 
+/**
+ * Funcion auxiliar para ocultar los tooltips
+ */
 var hideTooltips = function hideTooltips() {
     var tooltips = document.getElementsByClassName('tooltip');
     Array.prototype.forEach.call(tooltips, function (item) {
@@ -45,6 +57,9 @@ var addTooltip = function addTooltip(res, elements, messages) {
     elements.loading.classList += ' hidden';
 };
 
+/**
+ * Función para gestionar la comprobación del correo
+ */
 var submitCheckForm = function submitCheckForm(e) {
     e.preventDefault();
     var config = {
@@ -54,10 +69,13 @@ var submitCheckForm = function submitCheckForm(e) {
     var loading = document.getElementById('spinnerCheck');
     var tooltip = document.getElementById('tooltipCheck');
 
+    //Se oculta el tooltip y se muestra el spinner
     tooltip.classList += 'hidden';
     loading.classList = 'bowlG';
 
     ajax(config).then(function (res) {
+        //Si la respuesta es correcta se muestra el tooltip
+        //dependiendo de si el correo es correcto o no
         res = JSON.parse(res);
         var elements = {
             tooltip: tooltip,
@@ -70,10 +88,13 @@ var submitCheckForm = function submitCheckForm(e) {
         };
         addTooltip(res, elements, messages);
     }).catch(function (res) {
-        console.log(res);
+        console.error(res);
     });
 };
 
+/**
+ * Función para gestionar el borrado de usuarios
+ */
 var submitDeleteForm = function submitDeleteForm(e) {
     e.preventDefault();
     var config = {
@@ -105,6 +126,9 @@ var submitDeleteForm = function submitDeleteForm(e) {
     });
 };
 
+/**
+ * Función que se exporta y que pone a escuchar a los formularios
+ */
 var checkEmail = function checkEmail() {
     if (checkForm === null || checkForm === 'undefined') return false;
     checkForm.addEventListener('submit', submitCheckForm);
@@ -141,7 +165,7 @@ var validarPregunta = function validarPregunta(pregunta) {
         for (var _iterator = inputs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var input = _step.value;
 
-            if (input.value === '') return false;
+            if (input.value.trim() === '') return false; //Si es vacio o esta lleno de espacios => NO VALIDO
         }
     } catch (err) {
         _didIteratorError = true;
@@ -206,6 +230,8 @@ var generarJSON = function generarJSON() {
 
             question = {};
             if (!validarPregunta(pregunta)) return false;
+            //Si la pregunta es valida la añade al objeto
+            //que luego se envia al servidor
             var select = pregunta.querySelector('select');
             question["-complexity"] = pregunta.querySelector('input[type=number]').value.toString();
             question["-subject"] = select.options[select.selectedIndex].value;
@@ -215,7 +241,7 @@ var generarJSON = function generarJSON() {
             question.correctResponse = {
                 "value": pregunta.querySelector('.answer').value
             };
-            quizJSON.assessmentItems.assessmentItem.push(question);
+            quizJSON.assessmentItems.assessmentItem.push(question); //Pregunta añadida al resto de preguntas
         }
     } catch (err) {
         _didIteratorError3 = true;
@@ -238,11 +264,14 @@ var generarJSON = function generarJSON() {
 var submitFormPHP = function submitFormPHP(e) {
     e.preventDefault();
     if (!validarForm()) window.alert("Formulario con campos vacios");else {
-        //TODO: Gestionar el envio de datos v.PHP
         form.submit();
     }
 };
 
+/*
+* Genera un formulario oculto para poder enviar las preguntas a traves de JS
+* De esta forma permite enviar el mismo formulario usando PHP (forma original) o JS (forma alternativa)
+ */
 var postData = function postData(path) {
     var newForm = document.createElement("form");
     newForm.setAttribute("method", 'POST');
@@ -255,21 +284,23 @@ var postData = function postData(path) {
     document.body.appendChild(newForm);
     newForm.submit();
 };
-var submitFormJS = function submitFormJS(e) {
 
+var submitFormJS = function submitFormJS(e) {
     e.preventDefault();
     if (validarForm()) {
         generarJSON();
-        postData('/quiz');
+        postData('./quiz');
     } else window.alert("Formulario con campos vacios");
 };
 
 var insertQuestion = function insertQuestion() {
+    //Esto de meter el string así a pelo es una cerdada
     var questionContent = "\n      <div class=\"quiz-question-container\">\n          <div class=\"question-pos\"></div>\n          <input type=\"text\" name=\"pregunta[]\" value=\"\" placeholder=\"Introduce una nueva pregunta...\" class=\"question\" required>\n      </div>\n  ";
 
     var answerContent = "<label for=\"respuestas[]\" class=\"fa fa-check correct\"></label>\n    <input type=\"text\" name=\"respuesta[]\" class=\"answer\" value=\"\" required>\n    <label for=\"dificultad[]\" class=\"fa fa-tachometer\"></label>\n    <input type=\"number\" min=\"1\" max=\"5\" name=\"dificultad[]\" value=\"1\" class=\"quiz-difficulty\">\n    <label for=\"subject[]\" class=\"fa fa-book\"></label>\n    <select class=\"select-subject\" name=\"subject[]\">\n      <option value=\"Internet\">Internet</option>\n      <option value=\"Web\">Web</option>\n      <option value=\"Subject3\">Subject3</option>\n      <option value=\"Subject4\">Subject4</option>\n      <option value=\"Subject5\">Subject5</option>\n      <option value=\"Subject6\">Subject6</option>\n    </select>";
+
     if (!validarForm()) return window.alert('No puedes añadir más preguntas si aún hay sin rellenar');
-    var deleteBtn = document.createElement('div');
+    var deleteBtn = document.createElement('div'); //Añade un btn para poder borrar la pregunta
     var nodeQuestion = document.createElement('div');
     var questionAnswerBox = document.createElement('div');
 
@@ -284,6 +315,7 @@ var insertQuestion = function insertQuestion() {
     form.insertBefore(nodeQuestion, btnAddQuestion);
 };
 
+//Borra la pregunta actual
 var removeQuestion = function removeQuestion(e) {
     e.target.parentElement.parentElement.remove();
 };
@@ -307,7 +339,9 @@ var _table = require('./table.js');
 
 var _check = require('./check.js');
 
-(0, _table.setTable)();
+(0, _table.setTable)(); //Esto es una guarrada, lo suyo es hacer una SAP o diferentes ficheros
+//js pero así cargo solo uno.
+
 (0, _form.setForm)();
 (0, _check.setCheck)();
 
@@ -317,12 +351,10 @@ var _check = require('./check.js');
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 //UI elements
 var table = document.getElementById('table-quiz');
 
+//Devuelve una fila con un elemento de cada pregunta por celda
 var addRow = function addRow(data) {
     var row = '';
     data.forEach(function (value, i) {
@@ -331,10 +363,11 @@ var addRow = function addRow(data) {
     return row;
 };
 
+//Función para gestionar el envío de peticiones AJAX
 var getJSONPost = function getJSONPost() {
     return new Promise(function (resolve, reject) {
         var http = new XMLHttpRequest();
-        var url = "/api/questions";
+        var url = "./api/questions";
         http.open("POST", url, true);
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         http.onreadystatechange = function () {
@@ -346,6 +379,7 @@ var getJSONPost = function getJSONPost() {
     });
 };
 
+//Función para rellenar la tabla con las preguntas
 var fillTable = function fillTable(data) {
     data = JSON.parse(data);
     var questions = data.assessmentItems.assessmentItem;
@@ -379,8 +413,9 @@ var fillTable = function fillTable(data) {
     }
 };
 
+//Función para añadir la tabla
 var addTable = function addTable() {
-    if (table === null || (typeof table === 'undefined' ? 'undefined' : _typeof(table)) === (typeof undefined === 'undefined' ? 'undefined' : _typeof(undefined))) return false; //Para que se siga ejecutando si no es la pagina
+    if (table === null || typeof table === 'undefined') return false; //Para que se siga ejecutando si no es la pagina
     getJSONPost().then(function (data) {
         fillTable(data);
     });

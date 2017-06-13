@@ -23,8 +23,8 @@
     "gulp-uglify": "^2.0.0"
   },
   "scripts": {
-    "scripts": "babel --presets es2015 ./scripts/main.js --out-file ../app/script/bundle.js",
-    "style": "sass --watch estilo:../app/style",
+    "scripts": "babel --presets es2015 ./script/main.js --out-file ../static/script/bundle.js",
+    "style": "sass --watch estilo:../static/style",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

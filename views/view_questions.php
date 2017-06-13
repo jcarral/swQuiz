@@ -1,14 +1,14 @@
-<a href="/quiz"class="btn-addQuestion">
+<a href="./quiz"class="btn-addQuestion">
   <i class="fa fa-plus"></i>
   <p  class="">Añadir pregunta/s</p>
 </a>
 
-<a href="/api/questions"class="btn-addQuestion btn-viewJson">
+<a href="./api/questions"class="btn-addQuestion btn-viewJson">
   <i class="">{&nbsp;}</i>
   <p  class="">Ver JSON</p>
 </a>
 
-<a href="/check" class="btn-addQuestion btn-cloud">
+<a href="./check" class="btn-addQuestion btn-cloud">
   <i class="fa fa-cloud"></i>
   <p>
     REST

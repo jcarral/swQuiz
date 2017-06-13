@@ -80,7 +80,7 @@ const submitFormJS = function(e) {
     e.preventDefault()
     if (validarForm()) {
         generarJSON()
-        postData('/quiz')
+        postData('./quiz')
     } else window.alert("Formulario con campos vacios")
 }
 

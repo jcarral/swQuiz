@@ -14,7 +14,7 @@ const addRow = (data) => {
 const getJSONPost = () => {
     return new Promise((resolve, reject) => {
         let http = new XMLHttpRequest();
-        let url = "/api/questions";
+        let url = "./api/questions";
         http.open("POST", url, true);
         http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         http.onreadystatechange = () => {

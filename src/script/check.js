@@ -84,7 +84,7 @@ const submitCheckForm = (e) => {
             addTooltip(res, elements, messages)
         })
         .catch((res) => {
-            console.log(res);
+            console.error(res);
         })
 }
 

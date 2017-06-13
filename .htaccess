@@ -1,4 +1,5 @@
 RewriteEngine on
+RewriteBase /my-site/app/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule . index.php [L]
-AddType text/css .css 
+AddType text/css .css

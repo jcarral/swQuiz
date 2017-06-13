@@ -2,7 +2,13 @@
   require_once __DIR__ . '/vendor/autoload.php';
 
   $klein = new \Klein\Klein();
+	$base  = dirname($_SERVER['PHP_SELF']);
 
+	// Update request when we have a subdirectory
+		if(ltrim($base, '/')){
+
+		    $_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], strlen($base));
+		}
   //GESTION DE LAS RUTAS
   $klein->respond(array('POST', 'GET'), '/', function () {
     $viewRoute = '/view_questions.php';
